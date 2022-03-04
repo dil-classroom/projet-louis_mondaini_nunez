@@ -6,7 +6,10 @@ import picocli.CommandLine;
         name = "dil",
         description = "DIL Commands",
         subcommands = {
-                testCommand.class
+                newCommand.class,
+                cleanCommand.class,
+                buildCommand.class,
+                serveCommand.class,
         })
 public class DILCommand implements Runnable {
 
