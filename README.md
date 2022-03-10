@@ -2,10 +2,12 @@
 
 ## Table des matières
 
-1. [Description](#description)
-1.1 [But](#but)
-1.2 [Auteurs](#auteurs)
-1.3 [Licence](#licence)
+* [Description du projet](#description-du-projet)
+  * [But](#but)
+  * [Auteurs](#auteurs)
+  * [Licence](#licence)
+  * [Contributions](#contributions)
+
 
 ## Description du projet
 
