@@ -4,6 +4,8 @@ import picocli.CommandLine;
 
 @CommandLine.Command(
         name = "clean",
+        mixinStandardHelpOptions = true,
+        version = "0.1",
         description = "Run the clean command"
 )
 public class cleanCommand implements Runnable {
