@@ -16,8 +16,7 @@ import java.util.concurrent.Callable;
         })
 public class Statique implements Callable<Integer> {
 
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) {
         int exitCode = new CommandLine(new Statique()).execute(args);
         if (exitCode != 0) {
             System.exit(exitCode);
