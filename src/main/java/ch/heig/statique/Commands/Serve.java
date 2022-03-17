@@ -1,16 +1,16 @@
-package ch.heig.dil.Commands;
+package ch.heig.statique.Commands;
 
 import picocli.CommandLine;
 
 import java.util.concurrent.Callable;
 
 @CommandLine.Command(
-        name = "new",
+        name = "serve",
         mixinStandardHelpOptions = true,
         version = "0.1",
-        description = "Init a static site"
+        description = "Serve a static site"
 )
-public class Init implements Callable<Integer> {
+public class Serve implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {

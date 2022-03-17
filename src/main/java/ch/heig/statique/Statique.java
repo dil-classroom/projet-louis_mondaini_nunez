@@ -1,6 +1,6 @@
-package ch.heig.dil;
+package ch.heig.statique;
 
-import ch.heig.dil.Commands.*;
+import ch.heig.statique.Commands.*;
 import picocli.CommandLine;
 
 import java.util.concurrent.Callable;
