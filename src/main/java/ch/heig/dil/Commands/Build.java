@@ -1,16 +1,18 @@
 package ch.heig.dil.Commands;
 
 import picocli.CommandLine;
+import java.util.concurrent.Callable;
 
 @CommandLine.Command(
         name = "build",
         mixinStandardHelpOptions = true,
         version = "0.1",
-        description = "Run the build command"
+        description = "Build a static site"
 )
-public class buildCommand implements Runnable {
+public class Build implements Callable<Integer> {
+
     @Override
-    public void run() {
-        System.out.println("build command");
+    public Integer call() throws Exception {
+        return 0;
     }
 }

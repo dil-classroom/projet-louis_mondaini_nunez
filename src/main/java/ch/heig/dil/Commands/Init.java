@@ -2,15 +2,18 @@ package ch.heig.dil.Commands;
 
 import picocli.CommandLine;
 
+import java.util.concurrent.Callable;
+
 @CommandLine.Command(
         name = "new",
         mixinStandardHelpOptions = true,
         version = "0.1",
-        description = "Run the new command"
+        description = "Init a static site"
 )
-public class newCommand implements Runnable {
+public class Init implements Callable<Integer> {
+
     @Override
-    public void run() {
-        System.out.println("run command");
+    public Integer call() throws Exception {
+        return 0;
     }
 }

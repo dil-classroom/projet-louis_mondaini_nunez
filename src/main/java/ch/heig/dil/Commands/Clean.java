@@ -2,15 +2,18 @@ package ch.heig.dil.Commands;
 
 import picocli.CommandLine;
 
+import java.util.concurrent.Callable;
+
 @CommandLine.Command(
         name = "clean",
         mixinStandardHelpOptions = true,
         version = "0.1",
-        description = "Run the clean command"
+        description = "Clean a static site"
 )
-public class cleanCommand implements Runnable {
+public class Clean implements Callable<Integer> {
+
     @Override
-    public void run() {
-        System.out.println("clean command");
+    public Integer call() throws Exception {
+        return 0;
     }
 }
