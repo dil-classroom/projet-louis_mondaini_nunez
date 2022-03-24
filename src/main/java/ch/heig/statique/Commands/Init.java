@@ -5,7 +5,7 @@ import picocli.CommandLine;
 import java.util.concurrent.Callable;
 
 @CommandLine.Command(
-        name = "new",
+        name = "init",
         mixinStandardHelpOptions = true,
         version = "0.1",
         description = "Init a static site"
