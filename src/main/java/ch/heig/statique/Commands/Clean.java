@@ -17,7 +17,7 @@ public class Clean implements Callable<Integer> {
     @CommandLine.Parameters(index = "0", description = "The file whose checksum to calculate.")
     String file;
 
-    void deleteDirectoryRecursionJava6(File file) throws IOException {
+    void deleteDirectoryRecursionJava6(File file) {
         if (file.isDirectory()) {
             File[] entries = file.listFiles();
             if (entries != null) {
