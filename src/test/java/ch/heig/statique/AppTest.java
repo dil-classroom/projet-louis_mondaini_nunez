@@ -1,4 +1,4 @@
-package ch.heig.dil;
+package ch.heig.statique;
 
 import static org.junit.Assert.assertTrue;
 
