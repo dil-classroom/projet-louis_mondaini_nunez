@@ -26,9 +26,7 @@ public class Clean implements Callable<Integer> {
                 }
             }
         }
-        if (!file.delete()) {
-            throw new IOException("Failed to delete " + file);
-        }
+        file.delete();
     }
 
     @Override
