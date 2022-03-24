@@ -6,9 +6,9 @@
 
   <groupId>ch.heig.dil</groupId>
   <artifactId>projet-louis_mondaini_nunez</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>0.1</version>
 
-  <name>projet-louis_mondaini_nunez</name>
+  <name>Statique</name>
   <url>http://www.heig-dil.com</url>
 
   <properties>
@@ -32,6 +32,14 @@
   </dependencies>
 
   <build>
+
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+    </resources>
+
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <!-- clean lifecycle, see https://maven.apache.org/ref/current/maven-core/lifecycles.html#clean_Lifecycle -->
