@@ -39,5 +39,8 @@ public class AppTest
                 "<h2>Mon sous-titre</h2>\n" +
                 "<p>Le contenu de mon article.</p>\n"
                 , page.getHtml());
+        assertEquals(page.getMetadata().get("titre").get(0), "Mon premier article");
+        assertEquals(page.getMetadata().get("auteur").get(0), "Bertil Chapuis");
+        assertEquals(page.getMetadata().get("date").get(0), "2021-03-10");
     }
 }
