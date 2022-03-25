@@ -7,6 +7,8 @@ import ch.heig.dil.Parser.PageParser;
 import ch.heig.dil.Site.Page;
 import org.junit.Test;
 
+import java.io.File;
+
 /**
  * Unit test for simple App.
  */
@@ -38,6 +40,20 @@ public class AppTest
                 "<h1>Mon premier article</h1>\n" +
                 "<h2>Mon sous-titre</h2>\n" +
                 "<p>Le contenu de mon article.</p>\n"
+                , page.getHtml());
+        assertEquals(page.getMetadata().get("titre").get(0), "Mon premier article");
+        assertEquals(page.getMetadata().get("auteur").get(0), "Bertil Chapuis");
+        assertEquals(page.getMetadata().get("date").get(0), "2021-03-10");
+    }
+
+    @Test
+    public void parseFromFileMarkdownYaml() {
+        final File file = new File("test.md");
+        Page page = PageParser.parseFromMarkdownFile(file);
+        assertEquals(
+                "<h1>Mon premier article</h1>\n" +
+                        "<h2>Mon sous-titre</h2>\n" +
+                        "<p>Le contenu de mon article.</p>\n"
                 , page.getHtml());
         assertEquals(page.getMetadata().get("titre").get(0), "Mon premier article");
         assertEquals(page.getMetadata().get("auteur").get(0), "Bertil Chapuis");
