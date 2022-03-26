@@ -20,3 +20,6 @@ assignees: ''
 |                  |                    |              |               |
 
 ### Dépendances d'autres tâches
+
+- #45
+- #46
