@@ -15,7 +15,7 @@ assignees: ''
 - [ ] Tâche 2
 
 ### Durée
-| Optimiste  | Pessimiste   | Attentu  | Effecuté |
+| Optimiste  | Pessimiste   | Attentu  | Effecuté ✔ |
 |------------|-------------|----------|---------|
 |                  |                    |              |               |
 
