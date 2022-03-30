@@ -14,7 +14,7 @@ import java.util.concurrent.Callable;
 )
 public class Clean implements Callable<Integer> {
 
-    @CommandLine.Parameters(index = "0", description = "The file whose checksum to calculate.")
+    @CommandLine.Parameters(index = "0", description = "The directory where the static site was initiated")
     String file;
 
     void deleteDirectoryRecursionJava6(File file) {
