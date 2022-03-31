@@ -1,18 +1,17 @@
-package ch.heig.dil;
+package ch.heig.statique;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import ch.heig.dil.Parser.PageParser;
-import ch.heig.dil.Site.Page;
-import org.junit.Test;
+import ch.heig.statique.Parser.PageParser;
+import ch.heig.statique.Site.Page;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Unit test for simple App.
  */
-public class AppTest 
+public class ParserTest
 {
     /**
      * Rigorous Test :-)

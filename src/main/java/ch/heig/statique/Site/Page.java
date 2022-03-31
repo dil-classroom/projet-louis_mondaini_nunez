@@ -1,4 +1,4 @@
-package ch.heig.dil.Site;
+package ch.heig.statique.Site;
 
 import java.util.List;
 import java.util.Map;

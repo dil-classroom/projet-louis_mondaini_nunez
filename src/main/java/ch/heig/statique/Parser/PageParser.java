@@ -1,7 +1,7 @@
-package ch.heig.dil.Parser;
+package ch.heig.statique.Parser;
 
-import ch.heig.dil.Site.Page;
-import ch.heig.dil.Utils.Utils;
+import ch.heig.statique.Site.Page;
+import ch.heig.statique.Utils.Utils;
 import org.commonmark.Extension;
 import org.commonmark.ext.front.matter.YamlFrontMatterExtension;
 import org.commonmark.ext.front.matter.YamlFrontMatterVisitor;
@@ -10,7 +10,6 @@ import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
 
 import java.io.*;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidParameterException;
 import java.util.*;

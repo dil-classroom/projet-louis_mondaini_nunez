@@ -1,4 +1,4 @@
-package ch.heig.dil.Utils;
+package ch.heig.statique.Utils;
 
 public class Utils {
     /**
