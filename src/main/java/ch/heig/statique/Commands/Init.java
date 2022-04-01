@@ -3,6 +3,7 @@ package ch.heig.statique.Commands;
 import picocli.CommandLine;
 
 import java.io.File;
+import java.nio.file.Paths;
 import java.util.concurrent.Callable;
 
 @CommandLine.Command(
@@ -20,7 +21,11 @@ public class Init implements Callable<Integer> {
     public Integer call() throws Exception {
         try {
 
-            file = new File(System.getProperty("user.dir") + "\\site" + file.toString());
+
+            if (file.isAbsolute()) // Si l'utilisateur donne un chemin absolu, lance une exception puisque nous
+                // souhaitons créer le site statique à un endroit spécifique
+                throw new RuntimeException("You must provide a relative path for the command");
+            file = new File(Paths.get("").toAbsolutePath() + "\\site" + file.toString());
             if (!file.mkdirs()) {
                 throw new RuntimeException("Could not create directory: " + file.toString());
             }
