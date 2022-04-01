@@ -23,14 +23,15 @@ Le but de ce projet est de créer un générateur de site statique en Java. Il e
 
 ## Installation
 
-Pour pouvoir utiliser `statique`, lancer le build du projet et unzip la source
+Pour pouvoir utiliser le programme `statique`, il suffit de lancer le build du 
+projet puis de unzip la source en exécutant les commandes suivantes
 
 ```
 mvn clean install \
     && unzip -o target/statique.zip
 ```
 
-puis ajouter le binaire au PATH
+Il est alors ensuite possible d'ajouter le projet dans son PATH
 
 Linux : 
 ```export PATH=$PATH:`pwd`/statique/bin```

@@ -13,7 +13,8 @@ import java.util.concurrent.Callable;
 )
 public class Init implements Callable<Integer> {
 
-    @CommandLine.Parameters(index = "0", description = "The directory where the site will be initiated")
+    @CommandLine.Parameters(index = "0", description = "The absolute path where the " +
+            "root directory of the site will be initiated")
     private File file;
 
     @Override
