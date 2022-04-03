@@ -7,6 +7,10 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.Callable;
 
+/**
+ * Classe principale du site
+ * Point d'entrée des différentes commandes de génération d'un site
+ */
 @CommandLine.Command(
         name = "statique",
         description = "A static site generator",
@@ -37,6 +41,10 @@ public class Statique implements Callable<Integer> {
     }
 }
 
+/**
+ * Implémentation de la commande "version" qui retourne la version du projet
+ * La version retournée correspond est celle dans le fichier pom.xml
+ */
 class VersionProvider implements CommandLine.IVersionProvider {
     public String[] getVersion() throws IOException {
 

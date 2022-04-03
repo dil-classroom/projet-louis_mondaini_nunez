@@ -5,6 +5,9 @@ import picocli.CommandLine;
 import java.io.File;
 import java.util.concurrent.Callable;
 
+/**
+ * Permet d'effacer le dossier build/ d'un site statique
+ */
 @CommandLine.Command(
         name = "clean",
         mixinStandardHelpOptions = true,

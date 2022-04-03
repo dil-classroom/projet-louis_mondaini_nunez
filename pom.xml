@@ -47,8 +47,6 @@
       <artifactId>commonmark-ext-yaml-front-matter</artifactId>
       <version>0.17.2</version>
     </dependency>
-
-
   </dependencies>
 
   <build>

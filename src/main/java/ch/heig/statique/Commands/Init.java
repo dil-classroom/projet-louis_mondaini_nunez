@@ -5,6 +5,11 @@ import picocli.CommandLine;
 import java.io.File;
 import java.util.concurrent.Callable;
 
+/**
+ * Permet d'initialiser un site statique
+ * Génère un fichier config.yaml contenant les configs du site
+ * Génère un fichier index.md page racine du projet
+ */
 @CommandLine.Command(
         name = "init",
         mixinStandardHelpOptions = true,

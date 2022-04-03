@@ -3,6 +3,10 @@ package ch.heig.statique.Commands;
 import picocli.CommandLine;
 import java.util.concurrent.Callable;
 
+/**
+ * Permet de compiler un projet en site statique
+ * Le site généré se trouve dans le dossier build/
+ */
 @CommandLine.Command(
         name = "build",
         mixinStandardHelpOptions = true,
