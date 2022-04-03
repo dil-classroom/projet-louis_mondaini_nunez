@@ -5,7 +5,6 @@ import java.io.File;
 import java.nio.file.Paths;
 import java.util.concurrent.Callable;
 import org.apache.commons.io.FileUtils;
-import java.time.*;
 
 @CommandLine.Command(
         name = "init",
@@ -32,11 +31,13 @@ public class Init implements Callable<Integer> {
                 throw new RuntimeException("Could not create directory: " + file.toString());
             }
 
+            // Affichage du chemin ou a été initialisé le site
             System.out.println("Created directory: " + file.getAbsolutePath());
 
             File config = new File(file.toString() + "\\config.yaml");
             File index = new File(file.toString() + "\\index.md");
 
+            // Création du fichier de configuration
             if (config.createNewFile()) {
                 System.out.println("Config file created");
                 String content = "titre: titre du site" + CRLF
@@ -47,6 +48,7 @@ public class Init implements Callable<Integer> {
                 System.out.println("Config file could not be created");
             }
 
+            // Création du fichier index
             if (index.createNewFile()) {
                 System.out.println("Index file created");
                 String content = "---" + CRLF
@@ -61,7 +63,6 @@ public class Init implements Callable<Integer> {
             } else {
                 System.out.println("Index file could not be created");
             }
-
         } catch (Exception e) {
             System.err.println(e.getMessage());
             throw e;
