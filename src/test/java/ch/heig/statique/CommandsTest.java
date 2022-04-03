@@ -29,7 +29,7 @@ public class CommandsTest {
     void testInitCommand() throws Exception {
         try (ByteArrayOutputStream output = new ByteArrayOutputStream()) {
             System.setOut(new PrintStream(output));
-            new CommandLine(new Init()).execute("/abc");
+            new CommandLine(new Init()).execute(System.getProperty("user.dir") + "\\abc");
             assertTrue((output.toString().contains("Config file created")));
         }
     }
@@ -41,7 +41,7 @@ public class CommandsTest {
     @Test
     @Order(2)
     void testInitFolderIsCreated() {
-        Path path = Paths.get(System.getProperty("user.dir") + "\\site\\abc");
+        Path path = Paths.get(System.getProperty("user.dir") + "\\abc\\site");
         assertTrue(Files.exists(path));
     }
 
@@ -51,9 +51,9 @@ public class CommandsTest {
     @Test
     @Order(3)
     void testInitFolderConfigFiles() {
-        Path path = Paths.get(System.getProperty("user.dir") + "\\site\\abc\\config.yaml");
+        Path path = Paths.get(System.getProperty("user.dir") + "\\abc\\site\\config.yaml");
         assertTrue(Files.exists(path));
-        path = Paths.get(System.getProperty("user.dir") + "\\site\\abc\\index.md");
+        path = Paths.get(System.getProperty("user.dir") + "\\abc\\site\\index.md");
         assertTrue(Files.exists(path));
     }
 
@@ -82,7 +82,7 @@ public class CommandsTest {
      */
     @AfterAll
     public static void cleanUp() throws IOException {
-        Path path = Paths.get(System.getProperty("user.dir") + "\\site");
+        Path path = Paths.get(System.getProperty("user.dir") + "\\abc");
         Files.walk(path).sorted(Comparator.reverseOrder())
                 .map(Path::toFile)
                 .forEach(File::delete);

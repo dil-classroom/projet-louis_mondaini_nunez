@@ -26,7 +26,7 @@ public class Init implements Callable<Integer> {
     public Integer call() throws Exception {
         try {
 
-            file = new File(System.getProperty("user.dir") + "\\site" + file.toString());
+            file = new File(file.toString() + "\\site");
             if (!file.mkdirs()) {
                 throw new RuntimeException("Could not create directory: " + file.toString());
             }
