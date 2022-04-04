@@ -19,6 +19,10 @@ public class Clean implements Callable<Integer> {
     @CommandLine.Parameters(index = "0", description = "The directory where the static site was initiated")
     String file;
 
+    /**
+     * Deletes file or directory
+     * @param file the file to delete. If the file is a directory, delete its content recursively
+     */
     void deleteDirectory(File file) {
         if (file.isDirectory()) {
             File[] entries = file.listFiles();
@@ -28,7 +32,10 @@ public class Clean implements Callable<Integer> {
                 }
             }
         }
-        file.delete();
+        if (!file.exists())
+            System.out.println("File " + file.getAbsolutePath() + " does not exist");
+        else if (!file.delete())
+            System.out.println("File " + file.getAbsolutePath() + " could not be deleted");
     }
 
     @Override
