@@ -14,7 +14,16 @@ import java.nio.charset.StandardCharsets;
 import java.security.InvalidParameterException;
 import java.util.*;
 
+/**
+ *  A utility class allowing to convert markdown files with yaml front matter
+ *  metadata to HTML.
+ */
 public class PageParser {
+    /**
+     * Convert markdown files with yaml front matter metadata to HTML
+     * @param file the given file to convert
+     * @return The parsed html page
+     */
     public static Page parseFromMarkdownFile(File file) {
         if (!Utils.getExtensionFromString(file.getName()).equals("md")) {
             throw new InvalidParameterException("Cannot parse markdown from a non-markdown file.");
@@ -38,6 +47,11 @@ public class PageParser {
         return parseFromString(data.toString());
     }
 
+    /**
+     * Convert markdown string with yaml front matter metadata to HTML
+     * @param data the given markdown string to convert
+     * @return The parsed html page
+     */
     public static Page parseFromString(String data) {
         List<Extension> extensions = Collections.singletonList(YamlFrontMatterExtension.create());
         Parser parser = Parser.builder()
