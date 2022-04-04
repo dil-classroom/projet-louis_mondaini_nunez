@@ -22,7 +22,6 @@ public class CommandsTest {
 
     /**
      * Vérifie que la commande execute puisse être exécutée
-     * @throws Exception
      */
     @Test
     @Order(1)
@@ -59,7 +58,6 @@ public class CommandsTest {
 
     /**
      * Vérifie que la commande clean efface le dossier build
-     * @throws Exception
      */
     @Test
     @Order(4)
@@ -78,7 +76,6 @@ public class CommandsTest {
 
     /**
      * Supprimer le dossier site/ créé par la commande init
-     * @throws IOException
      */
     @AfterAll
     public static void cleanUp() throws IOException {

@@ -5,6 +5,8 @@ import ch.heig.statique.Site.Page;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -47,7 +49,8 @@ public class ParserTest
 
     @Test
     public void parseFromFileMarkdownYaml() {
-        final File file = new File("test.md");
+        Path path = Paths.get("src","test","resources").toAbsolutePath();
+        final File file = new File(path + "\\test.md");
         Page page = PageParser.parseFromMarkdownFile(file);
         assertEquals(
                 "<h1>Mon premier article</h1>\n" +
