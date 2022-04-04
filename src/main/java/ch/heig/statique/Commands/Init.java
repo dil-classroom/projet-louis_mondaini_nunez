@@ -6,6 +6,11 @@ import java.nio.file.Paths;
 import java.util.concurrent.Callable;
 import org.apache.commons.io.FileUtils;
 
+/**
+ * Permet d'initialiser un site statique
+ * Génère un fichier config.yaml contenant les configs du site
+ * Génère un fichier index.md page racine du projet
+ */
 @CommandLine.Command(
         name = "init",
         mixinStandardHelpOptions = true,
@@ -16,16 +21,22 @@ public class Init implements Callable<Integer> {
 
     static String CRLF = "\r\n";
 
-    @CommandLine.Parameters(index = "0", description = "The directory where the site will be initiated")
+    @CommandLine.Parameters(index = "0", description = "The absolute path where the " +
+            "root directory of the site will be initiated")
     private File file;
 
     @Override
     public Integer call() throws Exception {
         try {
-            if (!file.isAbsolute()) // Si l'utilisateur ne donne pas un chemin absolu, la commande crée le site dans un
-                                    // nouveau fichier site à partir de l'endroit ou est executée la commande
-                // récupère le path depuis lequel la commande est executée
-                file = new File(Paths.get("").toAbsolutePath() + "\\site" + file.toString());
+            // Si l'utilisateur ne donne pas un chemin absolu, la commande crée le site dans un
+            // nouveau fichier site à partir de l'endroit ou est executée la commande
+            // sinon la commande crée le dossier site à partir du chemin absolu donné
+            if (file.isAbsolute())  {
+                file = new File(file.toString() + "\\site");
+            } else {
+                file = new File(Paths.get("").toAbsolutePath() + "\\" + file.toString() + "\\site");
+            }
+
 
             if (!file.mkdirs()) {
                 throw new RuntimeException("Could not create directory: " + file.toString());
@@ -63,6 +74,7 @@ public class Init implements Callable<Integer> {
             } else {
                 System.out.println("Index file could not be created");
             }
+
         } catch (Exception e) {
             System.err.println(e.getMessage());
             throw e;

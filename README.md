@@ -21,10 +21,27 @@ Le but de ce projet est de créer un générateur de site statique en Java. Il e
 * Mondaini Damiano
 * Nunez Tania
 
-### Licence
+## Installation
+
+Pour pouvoir utiliser le programme `statique`, il suffit de lancer le build du 
+projet puis de unzip la source en exécutant les commandes suivantes
+
+```
+mvn clean install \
+    && unzip -o target/statique.zip
+```
+
+Il est alors ensuite possible d'ajouter le projet dans son PATH
+
+Linux : 
+```export PATH=$PATH:`pwd`/statique/bin```
+
+Windows : utiliser git bash
+
+## Licence
 
 Ce projet est sous licence **MIT**. Cela signifie que toute personne peut le reprendre, le modifier et le redistribuer.
 
-### Contributions
+## Contributions
 
 Pour contribuer au projet, merci de consulter le code de [conduite du projet](code-of-conduct.md).
