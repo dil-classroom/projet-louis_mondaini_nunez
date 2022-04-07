@@ -67,7 +67,6 @@ public class CommandsTest {
     @Test
     @Order(4)
     void testCleanCommand() throws Exception {
-
         File file = new File(System.getProperty("user.dir") + Utils.SEPARATOR + "abc"
                 + Utils.SEPARATOR + "site" + Utils.SEPARATOR + "build");
         file.mkdirs();
