@@ -1,5 +1,6 @@
 package ch.heig.statique.Commands;
 
+import ch.heig.statique.Utils.Utils;
 import picocli.CommandLine;
 import java.io.File;
 import java.nio.file.Paths;
@@ -32,9 +33,9 @@ public class Init implements Callable<Integer> {
             // nouveau fichier site à partir de l'endroit ou est executée la commande
             // sinon la commande crée le dossier site à partir du chemin absolu donné
             if (file.isAbsolute())  {
-                file = new File(file.toString() + "\\site");
+                file = new File(file.toString() + Utils.SEPARATOR + "site");
             } else {
-                file = new File(Paths.get("").toAbsolutePath() + "\\" + file.toString() + "\\site");
+                file = new File(Paths.get("").toAbsolutePath() + Utils.SEPARATOR + file.toString() + Utils.SEPARATOR + "site");
             }
 
 
@@ -45,8 +46,8 @@ public class Init implements Callable<Integer> {
             // Affichage du chemin ou a été initialisé le site
             System.out.println("Created directory: " + file.getAbsolutePath());
 
-            File config = new File(file.toString() + "\\config.yaml");
-            File index = new File(file.toString() + "\\index.md");
+            File config = new File(file.toString() + Utils.SEPARATOR + "config.yaml");
+            File index = new File(file.toString() + Utils.SEPARATOR + "index.md");
 
             // Création du fichier de configuration
             if (config.createNewFile()) {
