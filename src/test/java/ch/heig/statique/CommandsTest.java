@@ -63,14 +63,14 @@ public class CommandsTest {
     @Order(4)
     void testCleanCommand() throws Exception {
 
-        File file = new File(System.getProperty("user.dir") + "\\site\\abc\\build");
-        file.mkdir();
+        File file = new File(System.getProperty("user.dir") + "\\abc\\site\\build\\");
+        file.mkdirs();
 
         try (ByteArrayOutputStream output = new ByteArrayOutputStream()) {
             System.setOut(new PrintStream(output));
             new CommandLine(new Clean()).execute("/abc");
         }
-        Path path = Paths.get(System.getProperty("user.dir") + "\\site\\abc\\build");
+        Path path = Paths.get(System.getProperty("user.dir") + "\\abc\\site\\build");
         assertFalse(Files.exists(path));
     }
 
