@@ -1,4 +1,3 @@
-/* (C)2022 */
 package ch.heig.statique.Utils;
 
 import java.nio.file.FileSystems;

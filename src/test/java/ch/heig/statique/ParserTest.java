@@ -1,4 +1,3 @@
-/* (C)2022 */
 package ch.heig.statique;
 
 import static org.junit.jupiter.api.Assertions.*;
