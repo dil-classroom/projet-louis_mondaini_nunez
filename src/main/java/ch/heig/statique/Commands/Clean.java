@@ -40,7 +40,7 @@ public class Clean implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-        File f = new File(System.getProperty("user.dir")+ "\\site" + file + "\\build");
+        File f = new File(System.getProperty("user.dir") + "\\" + file + "\\site\\build");
         deleteDirectory(f);
         return 0;
     }
