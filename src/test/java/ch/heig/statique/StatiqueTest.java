@@ -1,12 +1,11 @@
 package ch.heig.statique;
 
-import org.junit.jupiter.api.Test;
-import picocli.CommandLine;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+import picocli.CommandLine;
 
 public class StatiqueTest {
 
@@ -18,9 +17,11 @@ public class StatiqueTest {
 
     @Test
     void exception() {
-        assertThrows(Exception.class, () -> {
-            throw new Exception();
-        });
+        assertThrows(
+                Exception.class,
+                () -> {
+                    throw new Exception();
+                });
     }
 
     @Test
