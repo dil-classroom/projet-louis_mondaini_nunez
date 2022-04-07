@@ -1,5 +1,6 @@
 package ch.heig.statique.Commands;
 
+import ch.heig.statique.Utils.Utils;
 import picocli.CommandLine;
 
 import java.io.File;
@@ -40,7 +41,7 @@ public class Clean implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
-        File f = new File(System.getProperty("user.dir") + "\\" + file + "\\site\\build");
+        File f = new File(System.getProperty("user.dir") + Utils.SEPARATOR + file + Utils.SEPARATOR + "site" + Utils.SEPARATOR + "build");
         deleteDirectory(f);
         return 0;
     }

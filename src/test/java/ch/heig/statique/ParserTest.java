@@ -2,6 +2,7 @@ package ch.heig.statique;
 
 import ch.heig.statique.Parser.PageParser;
 import ch.heig.statique.Site.Page;
+import ch.heig.statique.Utils.Utils;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -50,7 +51,7 @@ public class ParserTest
     @Test
     public void parseFromFileMarkdownYaml() {
         Path path = Paths.get("src","test","resources").toAbsolutePath();
-        final File file = new File(path + "\\test.md");
+        final File file = new File(path + Utils.SEPARATOR + "test.md");
         Page page = PageParser.parseFromMarkdownFile(file);
         assertEquals(
                 "<h1>Mon premier article</h1>\n" +
