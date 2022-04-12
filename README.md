@@ -1,5 +1,7 @@
 # Générateur de site statique en Java
 
+![example workflow](https://github.com/dil-classroom/projet-louis_mondaini_nunez/actions/workflows/<WORKFLOW_FILE>/badge.svg)
+
 ## Table des matières
 
 * [Description du projet](#description-du-projet)
