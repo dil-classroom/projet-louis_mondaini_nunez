@@ -3,9 +3,7 @@ package ch.heig.statique.Site;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Representation of a web page with an HTML content and metadata
- */
+/** Representation of a web page with an HTML content and metadata */
 public class Page {
     private final Map<String, List<String>> metadata;
     private final String html;
@@ -17,6 +15,7 @@ public class Page {
 
     /**
      * Metadata getter
+     *
      * @return metadata
      */
     public Map<String, List<String>> getMetadata() {
@@ -25,6 +24,7 @@ public class Page {
 
     /**
      * HTML getter
+     *
      * @return HTML
      */
     public String getHtml() {
