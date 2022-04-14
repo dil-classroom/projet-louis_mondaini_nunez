@@ -61,7 +61,10 @@ public class PageParser {
                             @Override
                             public void setAttributes(Node node, String tagName, Map<String, String> attributes) {
                                 if (node instanceof Link) {
-                                    System.out.println(node);
+                                    String file = attributes.get("href");
+                                    if(file.endsWith(".md")) {
+                                        attributes.replace("href", file.replace(".md", ".html"));
+                                    }
                                 }
                             }
                         };
