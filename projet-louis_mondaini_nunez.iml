@@ -24,5 +24,12 @@
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.5" level="project" />
     <orderEntry type="library" name="Maven: org.commonmark:commonmark:0.18.1" level="project" />
     <orderEntry type="library" name="Maven: org.commonmark:commonmark-ext-yaml-front-matter:0.17.2" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-server:10.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.jetty.toolchain:jetty-servlet-api:4.0.5" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-http:10.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-util:10.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-io:10.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:2.0.0-alpha0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: org.slf4j:slf4j-jdk14:2.0.0-alpha0" level="project" />
   </component>
 </module>
