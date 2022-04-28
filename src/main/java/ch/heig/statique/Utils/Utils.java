@@ -1,6 +1,9 @@
 package ch.heig.statique.Utils;
 
+import java.io.File;
+import java.io.IOException;
 import java.nio.file.FileSystems;
+import org.apache.commons.io.FileUtils;
 
 /** A simple utility class to simplify redondant tasks */
 public class Utils {
@@ -23,5 +26,14 @@ public class Utils {
         }
 
         return extension;
+    }
+
+    /** https://www.baeldung.com/java-copy-directory */
+    public static void copyDirectory(
+            String sourceDirectoryLocation, String destinationDirectoryLocation)
+            throws IOException {
+        File sourceDirectory = new File(sourceDirectoryLocation);
+        File destinationDirectory = new File(destinationDirectoryLocation);
+        FileUtils.copyDirectory(sourceDirectory, destinationDirectory);
     }
 }

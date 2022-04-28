@@ -1,9 +1,9 @@
 package ch.heig.statique.Commands;
 
+import ch.heig.statique.Utils.Utils;
 import java.io.File;
 import java.util.Properties;
 import java.util.concurrent.Callable;
-
 import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.DefaultHandler;
@@ -17,6 +17,8 @@ import picocli.CommandLine;
         version = "0.1",
         description = "Serve a static site")
 public class Serve implements Callable<Integer> {
+    @CommandLine.Parameters(index = "0", description = "The directory containing the site")
+    private File file;
 
     @Override
     public Integer call() throws Exception {
@@ -27,15 +29,25 @@ public class Serve implements Callable<Integer> {
         ResourceHandler resource_handler = new ResourceHandler();
         resource_handler.setDirectoriesListed(true);
 
-        String root = "site/build/";
-        File f = new File(root);
-        if (!f.exists() || !f.isDirectory()) {
+        if (file.isAbsolute()) {
+            file =
+                    new File(
+                            file.toString()
+                                    + Utils.SEPARATOR
+                                    + "site"
+                                    + Utils.SEPARATOR
+                                    + "build/");
+        } else {
+            throw new RuntimeException("Please use an aboslute path");
+        }
+
+        if (!file.exists() || !file.isDirectory()) {
             throw new RuntimeException("No site folder found. Please compile before");
         }
 
-        resource_handler.setResourceBase(root);
+        resource_handler.setResourceBase(file.toString());
         HandlerList handlers = new HandlerList();
-        handlers.setHandlers(new Handler[] { resource_handler, new DefaultHandler() });
+        handlers.setHandlers(new Handler[] {resource_handler, new DefaultHandler()});
         server.setHandler(handlers);
 
         server.start();
