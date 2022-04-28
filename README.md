@@ -34,7 +34,7 @@ mvn clean install \
 Il est alors ensuite possible d'ajouter le projet dans son PATH
 
 Linux : 
-```export PATH=$PATH:`pwd`/statique/bin```
+```export PATH=$PATH:&#96;pwd&#96;/statique/bin```
 
 Windows : utiliser git bash
 

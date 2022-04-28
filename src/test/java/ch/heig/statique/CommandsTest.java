@@ -76,6 +76,7 @@ public class CommandsTest {
     @Test
     @Order(4)
     void testCleanCommand() throws Exception {
+        // create build folder
         File file =
                 new File(
                         System.getProperty("user.dir")
@@ -87,19 +88,15 @@ public class CommandsTest {
                                 + "build");
         file.mkdirs();
 
+        // execute clean command
+        File file2 = new File(System.getProperty("user.dir") + Utils.SEPARATOR + "abc");
         try (ByteArrayOutputStream output = new ByteArrayOutputStream()) {
             System.setOut(new PrintStream(output));
-            new CommandLine(new Clean()).execute("/abc");
+            new CommandLine(new Clean()).execute(file2.toString());
         }
-        Path path =
-                Paths.get(
-                        System.getProperty("user.dir")
-                                + Utils.SEPARATOR
-                                + "abc"
-                                + Utils.SEPARATOR
-                                + "site"
-                                + Utils.SEPARATOR
-                                + "build");
+
+        // verify build folder doesn't exist
+        Path path = Paths.get(file.toString());
         assertFalse(Files.exists(path));
     }
 

@@ -1,4 +1,3 @@
-/* (C)2022 */
 package ch.heig.statique.Commands;
 
 import ch.heig.statique.Utils.Utils;
@@ -17,7 +16,7 @@ public class Clean implements Callable<Integer> {
     @CommandLine.Parameters(
             index = "0",
             description = "The directory where the static site was initiated")
-    String file;
+    private File file;
 
     /**
      * Deletes file or directory
@@ -40,17 +39,13 @@ public class Clean implements Callable<Integer> {
     }
 
     @Override
-    public Integer call() throws Exception {
-        File f =
-                new File(
-                        System.getProperty("user.dir")
-                                + Utils.SEPARATOR
-                                + file
-                                + Utils.SEPARATOR
-                                + "site"
-                                + Utils.SEPARATOR
-                                + "build");
-        deleteDirectory(f);
+    public Integer call() {
+        if (file.isAbsolute()) {
+            file = new File(file.toString() + Utils.SEPARATOR + "site" + Utils.SEPARATOR + "build");
+        } else {
+            throw new RuntimeException("Please use an aboslute path");
+        }
+        deleteDirectory(file);
         return 0;
     }
 }

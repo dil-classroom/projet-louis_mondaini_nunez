@@ -2,7 +2,6 @@ package ch.heig.statique.Commands;
 
 import ch.heig.statique.Utils.Utils;
 import java.io.File;
-import java.nio.file.Paths;
 import java.util.concurrent.Callable;
 import org.apache.commons.io.FileUtils;
 import picocli.CommandLine;
@@ -29,19 +28,10 @@ public class Init implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {
         try {
-            // Si l'utilisateur ne donne pas un chemin absolu, la commande crée le site dans un
-            // nouveau fichier site à partir de l'endroit ou est executée la commande
-            // sinon la commande crée le dossier site à partir du chemin absolu donné
             if (file.isAbsolute()) {
                 file = new File(file.toString() + Utils.SEPARATOR + "site");
             } else {
-                file =
-                        new File(
-                                Paths.get("").toAbsolutePath()
-                                        + Utils.SEPARATOR
-                                        + file.toString()
-                                        + Utils.SEPARATOR
-                                        + "site");
+                throw new RuntimeException("Please use an aboslute path");
             }
 
             if (!file.mkdirs()) {
