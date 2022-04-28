@@ -59,6 +59,11 @@
       <artifactId>commonmark-ext-yaml-front-matter</artifactId>
       <version>0.18.2</version>
     </dependency>
+    <dependency>
+      <groupId>com.github.jknack</groupId>
+      <artifactId>handlebars</artifactId>
+      <version>4.3.0</version>
+    </dependency>
   </dependencies>
 
   <build>
