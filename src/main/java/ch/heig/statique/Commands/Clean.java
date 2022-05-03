@@ -1,27 +1,26 @@
 package ch.heig.statique.Commands;
 
 import ch.heig.statique.Utils.Utils;
-import picocli.CommandLine;
-
 import java.io.File;
 import java.util.concurrent.Callable;
+import picocli.CommandLine;
 
-/**
- * Permet d'effacer le dossier build/ d'un site statique
- */
+/** Permet d'effacer le dossier build/ d'un site statique */
 @CommandLine.Command(
         name = "clean",
         mixinStandardHelpOptions = true,
         version = "0.1",
-        description = "Clean a static site"
-)
+        description = "Clean a static site")
 public class Clean implements Callable<Integer> {
 
-    @CommandLine.Parameters(index = "0", description = "The directory where the static site was initiated")
-    String file;
+    @CommandLine.Parameters(
+            index = "0",
+            description = "The directory where the static site was initiated")
+    private File file;
 
     /**
      * Deletes file or directory
+     *
      * @param file the file to delete. If the file is a directory, delete its content recursively
      */
     void deleteDirectory(File file) {
@@ -40,9 +39,13 @@ public class Clean implements Callable<Integer> {
     }
 
     @Override
-    public Integer call() throws Exception {
-        File f = new File(System.getProperty("user.dir") + Utils.SEPARATOR + file + Utils.SEPARATOR + "site" + Utils.SEPARATOR + "build");
-        deleteDirectory(f);
+    public Integer call() {
+        if (file.isAbsolute()) {
+            file = new File(file.toString() + Utils.SEPARATOR + "site" + Utils.SEPARATOR + "build");
+        } else {
+            throw new RuntimeException("Please use an aboslute path");
+        }
+        deleteDirectory(file);
         return 0;
     }
 }
