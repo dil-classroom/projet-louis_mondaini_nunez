@@ -30,7 +30,7 @@ jobs:
           release_name: Statique ${{ github.ref }}
 
           body: |
-            ${{ steps.getPatchNote.outputs.text }}
+            ${{ steps.getPatchNote.outputs.changelog }}
             
             # Installation
 
