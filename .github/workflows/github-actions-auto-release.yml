@@ -19,7 +19,7 @@ jobs:
             text="${content//'%'/'%25'}"
             text="${content//$'\n'/'%0A'}"
             text="${content//$'\r'/'%0D'}"
-            echo "::set-output name=text::$text"
+            echo "::set-output name=text::$(echo "$CHANGELOG")"
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
