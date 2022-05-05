@@ -12,6 +12,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Read patch Note file
+        id: getPatchNote
+        run: echo "::set-output name=text::$(cat ./doc/changelog)"
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -20,7 +23,10 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Statique ${{ github.ref }}
+
           body: |
+            ${{ steps.getPatchNote.outputs.text }}
+            
             # Installation
 
             Pour pouvoir installer et utiliser statique, consultez le fichier [README](https://github.com/dil-classroom/projet-louis_mondaini_nunez/tree/main#installation)
