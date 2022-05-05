@@ -15,11 +15,11 @@ jobs:
       - name: Read patch Note file
         id: getPatchNote
         run: |
-            export text=$(cat `pwd`/doc/changelog.md)
-            text="${content//'%'/'%25'}"
-            text="${content//$'\n'/'%0A'}"
-            text="${content//$'\r'/'%0D'}"
-            echo "::set-output name=text::$(echo "$CHANGELOG")"
+            export changelog=$(cat `pwd`/doc/changelog.md)
+            changelog="${content//'%'/'%25'}"
+            changelog="${content//$'\n'/'%0A'}"
+            changelog="${content//$'\r'/'%0D'}"
+            echo "::set-output name=changelog::$(echo "$changelog")"
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
