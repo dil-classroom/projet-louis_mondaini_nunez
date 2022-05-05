@@ -15,7 +15,7 @@ jobs:
       - name: Read patch Note file
         id: getPatchNote
         run: | 
-            text = $(cat `pwd`/doc/changelog.md)
+            export text = $(cat `pwd`/doc/changelog.md)
             text="${content//'%'/'%25'}"
             text="${content//$'\n'/'%0A'}"
             text="${content//$'\r'/'%0D'}"
