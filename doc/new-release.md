@@ -1,11 +1,17 @@
 # Publication d'une nouvelle release
 
 Cette doc a pour but de présenter comment publier une nouvelle release 
-grâce à Github action.
+du projet Statique grâce à Github action.
+
+## Modifier le changelog
+
+Pour pouvoir customiser le text affiché dans le changelog, il est conseillé
+de modifier le fichier `CHANGELOG.md` dans le dossier `doc` afin d'y ajouter le texte
+à afficher dans la release
 
 ## Publier une release
 
-Une fois la branche `main` mise à jour, il est possible de publier 
+Une fois la branche `main` mise à jour et le changelog complété, il est possible de publier 
 une nouvelle release. Pour ce faire, il suffit d'utiliser la commande
 suivante
     
