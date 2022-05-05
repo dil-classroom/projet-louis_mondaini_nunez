@@ -14,8 +14,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Read patch Note file
         id: getPatchNote
-        run: | 
-            export text = $(cat `pwd`/doc/changelog.md)
+        run: |
+            export text=$(cat `pwd`/doc/changelog.md)
             text="${content//'%'/'%25'}"
             text="${content//$'\n'/'%0A'}"
             text="${content//$'\r'/'%0D'}"
