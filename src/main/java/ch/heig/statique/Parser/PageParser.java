@@ -5,11 +5,15 @@ import ch.heig.statique.Utils.Utils;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidParameterException;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.io.FileUtils;
 import org.commonmark.*;
 import org.commonmark.ext.front.matter.YamlFrontMatterExtension;
 import org.commonmark.ext.front.matter.YamlFrontMatterVisitor;
@@ -20,51 +24,13 @@ import org.commonmark.renderer.html.AttributeProvider;
 import org.commonmark.renderer.html.AttributeProviderContext;
 import org.commonmark.renderer.html.AttributeProviderFactory;
 import org.commonmark.renderer.html.HtmlRenderer;
+import org.yaml.snakeyaml.Yaml;
 
-/** A utility class allowing to convert markdown files with yaml front matter metadata to HTML. */
 public class PageParser {
-    /**
-     * Convert markdown files with yaml front matter metadata to HTML
-     *
-     * @param file the given file to convert
-     * @return The parsed html page
-     */
-    public static Page parseFromMarkdownFile(File file) {
-        if (!Utils.getExtensionFromString(file.getName()).equals("md")) {
-            throw new InvalidParameterException("Cannot parse markdown from a non-markdown file.");
-        }
 
-        StringBuilder data = new StringBuilder();
-
-        try (BufferedReader bufferedReader =
-                new BufferedReader(new FileReader(file, StandardCharsets.UTF_8))) {
-
-            int c;
-            while ((c = bufferedReader.read()) != -1) {
-                data.append((char) c);
-            }
-
-        } catch (Exception exception) {
-            System.out.println(exception.getMessage());
-        }
-
-        return parseFromString(data.toString());
-    }
-
-    /**
-     * Convert markdown string with yaml front matter metadata to HTML
-     *
-     * @param data the given markdown string to convert
-     * @return The parsed html page
-     */
-    public static Page parseFromString(String data) {
-        List<Extension> extensions = Collections.singletonList(YamlFrontMatterExtension.create());
-        Parser parser = Parser.builder().extensions(extensions).build();
-
-        YamlFrontMatterVisitor visitor = new YamlFrontMatterVisitor();
-
-        Node document = parser.parse(data);
-        document.accept(visitor);
+    public static String convertMdToHtml(String content) {
+        Parser parser = Parser.builder().build();
+        Node document = parser.parse(content);
 
         HtmlRenderer renderer =
                 HtmlRenderer.builder()
@@ -91,12 +57,24 @@ public class PageParser {
                                         };
                                     }
                                 })
-                        .extensions(extensions)
                         .build();
 
-        String stringDocument = renderer.render(document);
-        Map<String, List<String>> metadata = visitor.getData();
+        return renderer.render(document);
+    }
 
-        return new Page(metadata, stringDocument);
+    public static Page parseFile(File file) throws IOException {
+        String content = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
+
+        return parseString(content);
+    }
+
+    public static Page parseString(String content) {
+        Yaml yaml = new Yaml();
+
+        String[] split = content.split("---");
+        Map<String, Object> metadata = yaml.load(split[0]);
+        metadata.replace("date", new SimpleDateFormat("yyyy-MM-dd").format(metadata.get("date")));
+
+        return new Page(metadata, split[1]);
     }
 }
