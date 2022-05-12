@@ -11,7 +11,7 @@ public class ParserTest {
     @Test
     public void parseFromString() {
         final String markdown =
-                        "titre: Mon premier article\n"
+                "titre: Mon premier article\n"
                         + "auteur: Bertil Chapuis\n"
                         + "date: 2021-03-10\n"
                         + "---\n"

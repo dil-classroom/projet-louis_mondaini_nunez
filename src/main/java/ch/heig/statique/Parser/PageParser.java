@@ -1,22 +1,13 @@
 package ch.heig.statique.Parser;
 
 import ch.heig.statique.Site.Page;
-import ch.heig.statique.Utils.Utils;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.security.InvalidParameterException;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
-
 import org.apache.commons.io.FileUtils;
 import org.commonmark.*;
-import org.commonmark.ext.front.matter.YamlFrontMatterExtension;
-import org.commonmark.ext.front.matter.YamlFrontMatterVisitor;
 import org.commonmark.node.Link;
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;

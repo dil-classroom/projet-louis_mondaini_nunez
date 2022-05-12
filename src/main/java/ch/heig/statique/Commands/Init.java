@@ -63,7 +63,7 @@ public class Init implements Callable<Integer> {
             if (index.createNewFile()) {
                 System.out.println("Index file created");
                 String content =
-                                "titre: Mon premier article"
+                        "titre: Mon premier article"
                                 + CRLF
                                 + "auteur: John Doe"
                                 + CRLF
@@ -104,17 +104,28 @@ public class Init implements Callable<Integer> {
             if (layoutTemplate.createNewFile()) {
                 System.out.println("Layout template file created");
                 String content =
-                        "<!DOCTYPE html>" + CRLF +
-                        "<html>" + CRLF +
-                        "<head>" + CRLF +
-                            "<meta charset=\"UTF-8\">" + CRLF +
-                            "<title>{{ site.titre }} | {{ page.titre }}</title>" + CRLF +
-                        "</head>" + CRLF +
-                        "<body>" + CRLF +
-                            "{% include menu.html }" + CRLF +
-                            "{{ content }}" + CRLF +
-                        "</body>" + CRLF +
-                        "</html>" + CRLF;
+                        "<!DOCTYPE html>"
+                                + CRLF
+                                + "<html>"
+                                + CRLF
+                                + "<head>"
+                                + CRLF
+                                + "<meta charset=\"UTF-8\">"
+                                + CRLF
+                                + "<title>{{ site.titre }} | {{ page.titre }}</title>"
+                                + CRLF
+                                + "</head>"
+                                + CRLF
+                                + "<body>"
+                                + CRLF
+                                + "{% include menu.html }"
+                                + CRLF
+                                + "{{ content }}"
+                                + CRLF
+                                + "</body>"
+                                + CRLF
+                                + "</html>"
+                                + CRLF;
                 FileUtils.writeStringToFile(layoutTemplate, content, "UTF-8");
             } else {
                 System.out.println("Layout template file could not be created");

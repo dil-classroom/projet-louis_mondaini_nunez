@@ -3,12 +3,6 @@ package ch.heig.statique.Commands;
 import ch.heig.statique.Parser.PageParser;
 import ch.heig.statique.Site.Page;
 import ch.heig.statique.Utils.Utils;
-import java.io.File;
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.util.Map;
-import java.util.concurrent.Callable;
-
 import com.github.jknack.handlebars.Context;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
@@ -16,6 +10,11 @@ import com.github.jknack.handlebars.context.JavaBeanValueResolver;
 import com.github.jknack.handlebars.context.MapValueResolver;
 import com.github.jknack.handlebars.io.FileTemplateLoader;
 import com.github.jknack.handlebars.io.TemplateLoader;
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.util.Map;
+import java.util.concurrent.Callable;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.yaml.snakeyaml.Yaml;
@@ -62,7 +61,8 @@ public class Build implements Callable<Integer> {
 
         var it = FileUtils.iterateFiles(buildFolder, new String[] {"md"}, true);
 
-        TemplateLoader loader = new FileTemplateLoader(new File(siteFolder + Utils.SEPARATOR + "template"));
+        TemplateLoader loader =
+                new FileTemplateLoader(new File(siteFolder + Utils.SEPARATOR + "template"));
         loader.setSuffix(".html");
         Handlebars handlebars = new Handlebars(loader);
         Template template = handlebars.compile("layout");
@@ -73,17 +73,22 @@ public class Build implements Callable<Integer> {
             File md = it.next();
             Page page = PageParser.parseFile(md);
 
-            Map<String, Object> siteConfig = yaml.load(FileUtils.readFileToString(config, StandardCharsets.UTF_8));
+            Map<String, Object> siteConfig =
+                    yaml.load(FileUtils.readFileToString(config, StandardCharsets.UTF_8));
 
+            Context context =
+                    Context.newBuilder(new Object())
+                            .combine("site", siteConfig)
+                            .combine("page", page.getMetadata())
+                            .combine("content", page.getContent())
+                            .resolver(MapValueResolver.INSTANCE, JavaBeanValueResolver.INSTANCE)
+                            .build();
 
-            Context context = Context.newBuilder(new Object())
-                    .combine("site", siteConfig)
-                    .combine("page", page.getMetadata())
-                    .combine("content", page.getContent())
-                    .resolver(MapValueResolver.INSTANCE, JavaBeanValueResolver.INSTANCE)
-                    .build();
-
-            FileUtils.writeStringToFile(md, PageParser.convertMdToHtml(template.apply(context)), StandardCharsets.UTF_8, false);
+            FileUtils.writeStringToFile(
+                    md,
+                    PageParser.convertMdToHtml(template.apply(context)),
+                    StandardCharsets.UTF_8,
+                    false);
 
             if (!md.renameTo(
                     new File(FilenameUtils.removeExtension(md.getAbsolutePath()) + ".html"))) {
