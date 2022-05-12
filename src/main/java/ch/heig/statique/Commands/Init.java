@@ -63,9 +63,7 @@ public class Init implements Callable<Integer> {
             if (index.createNewFile()) {
                 System.out.println("Index file created");
                 String content =
-                        "---"
-                                + CRLF
-                                + "titre: Mon premier article"
+                                "titre: Mon premier article"
                                 + CRLF
                                 + "auteur: John Doe"
                                 + CRLF
