@@ -6,6 +6,7 @@ import ch.heig.statique.Utils.Utils;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Iterator;
 import java.util.concurrent.Callable;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -49,7 +50,7 @@ public class Build implements Callable<Integer> {
                     return true;
                 });
 
-        var it = FileUtils.iterateFiles(build, new String[] {"md"}, true);
+        Iterator<File> it = FileUtils.iterateFiles(build, new String[] {"md"}, true);
 
         while (it.hasNext()) {
             File md = it.next();

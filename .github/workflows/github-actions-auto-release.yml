@@ -15,6 +15,8 @@ jobs:
       - name: Read patch Note file
         id: getPatchNote
         run: echo "::set-output name=text::$(cat ./doc/changelog)"
+      - name: Generate javadoc
+        run: mvn --batch-mode --update-snapshots javadoc:aggregate-jar
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -36,3 +38,16 @@ jobs:
             Merci à @damianomondaini @NunezTania @hadrylouis pour leurs contributions
           draft: false
           prerelease: false
+    - uses: montudor/action-zip@v1
+      with:
+        args: zip -qq -r api-doc.zip target/apidocs
+    - name: Upload Release Asset
+      id: upload-release-asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+        asset_path: ./statique-javadoc.zip
+        asset_name: statique-javadoc.zip
+        asset_content_type: application/zip

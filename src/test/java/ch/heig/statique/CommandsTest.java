@@ -8,7 +8,6 @@ import ch.heig.statique.Commands.Init;
 import ch.heig.statique.Utils.Utils;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -100,9 +99,13 @@ public class CommandsTest {
         assertFalse(Files.exists(path));
     }
 
-    /** Supprimer le dossier site/ créé par la commande init */
+    /**
+     * Supprimer le dossier site/ créé par la commande init
+     *
+     * @throws Exception Throws exception if a file or folder cannot be opened
+     */
     @AfterAll
-    public static void cleanUp() throws IOException {
+    public static void cleanUp() throws Exception {
         Path path = Paths.get(System.getProperty("user.dir") + Utils.SEPARATOR + "abc");
         Files.walk(path).sorted(Comparator.reverseOrder()).map(Path::toFile).forEach(File::delete);
     }
