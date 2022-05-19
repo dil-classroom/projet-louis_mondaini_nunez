@@ -24,6 +24,9 @@
     <orderEntry type="library" name="Maven: commons-io:commons-io:2.11.0" level="project" />
     <orderEntry type="library" name="Maven: org.commonmark:commonmark:0.18.2" level="project" />
     <orderEntry type="library" name="Maven: org.commonmark:commonmark-ext-yaml-front-matter:0.18.2" level="project" />
+    <orderEntry type="library" name="Maven: com.github.jknack:handlebars:4.3.0" level="project" />
+    <orderEntry type="library" name="Maven: org.yaml:snakeyaml:1.30" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-simple:1.7.2" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-server:10.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty.toolchain:jetty-servlet-api:4.0.5" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-http:10.0.0" level="project" />

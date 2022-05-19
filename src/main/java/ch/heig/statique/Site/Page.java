@@ -1,16 +1,15 @@
 package ch.heig.statique.Site;
 
-import java.util.List;
 import java.util.Map;
 
 /** Representation of a web page with an HTML content and metadata */
 public class Page {
-    private final Map<String, List<String>> metadata;
-    private final String html;
+    private final Map<String, Object> metadata;
+    private final String content;
 
-    public Page(Map<String, List<String>> metadata, String html) {
+    public Page(Map<String, Object> metadata, String html) {
         this.metadata = metadata;
-        this.html = html;
+        this.content = html;
     }
 
     /**
@@ -18,16 +17,16 @@ public class Page {
      *
      * @return metadata
      */
-    public Map<String, List<String>> getMetadata() {
+    public Map<String, Object> getMetadata() {
         return metadata;
     }
 
     /**
-     * HTML getter
+     * Content getter
      *
-     * @return HTML
+     * @return content
      */
-    public String getHtml() {
-        return html;
+    public String getContent() {
+        return content;
     }
 }
