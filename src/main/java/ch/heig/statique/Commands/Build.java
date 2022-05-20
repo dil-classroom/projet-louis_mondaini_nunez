@@ -32,6 +32,7 @@ public class Build implements Callable<Integer> {
 
     @Override
     public Integer call() throws IOException {
+
         if (siteFolder.isAbsolute()) {
             siteFolder = new File(siteFolder.toString() + Utils.SEPARATOR + "site");
         } else {
