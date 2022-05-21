@@ -20,7 +20,9 @@ jobs:
       - name: Install zip
         uses: montudor/action-zip@v1
       - name: Zip Javadoc
-        run: zip -qq -r javadoc.zip target/apidocs
+        run: | 
+          zip -qq -r javadoc.zip target/apidocs
+          ls -lisa target/apidocs
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
