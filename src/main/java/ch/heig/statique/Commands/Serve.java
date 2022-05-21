@@ -11,6 +11,7 @@ import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 import picocli.CommandLine;
 
+/** Démarre un serveur web afin de pouvoir accéder aux site statique. */
 @CommandLine.Command(
         name = "serve",
         mixinStandardHelpOptions = true,
