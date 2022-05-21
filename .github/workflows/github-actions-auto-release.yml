@@ -15,6 +15,8 @@ jobs:
       - name: Read patch Note file
         id: getPatchNote
         run: echo "::set-output name=text::$(cat ./doc/changelog)"
+      - name: Generate javadoc
+        run: mvn javadoc:aggregate-jar
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1

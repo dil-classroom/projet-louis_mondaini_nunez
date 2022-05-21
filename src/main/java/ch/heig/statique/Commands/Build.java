@@ -13,6 +13,7 @@ import com.github.jknack.handlebars.io.TemplateLoader;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.Callable;
 import org.apache.commons.io.FileUtils;
@@ -60,7 +61,7 @@ public class Build implements Callable<Integer> {
                     return true;
                 });
 
-        var it = FileUtils.iterateFiles(buildFolder, new String[] {"md"}, true);
+        Iterator<File> it = FileUtils.iterateFiles(buildFolder, new String[] {"md"}, true);
 
         TemplateLoader loader =
                 new FileTemplateLoader(new File(siteFolder + Utils.SEPARATOR + "template"));
