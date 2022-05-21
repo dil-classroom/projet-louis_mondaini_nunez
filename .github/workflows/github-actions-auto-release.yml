@@ -17,6 +17,10 @@ jobs:
         run: echo "::set-output name=text::$(cat ./doc/changelog)"
       - name: Generate javadoc
         run: mvn javadoc:aggregate-jar
+      - name: Install zip
+        uses: montudor/action-zip@v1
+      - name: Zip Javadoc
+        run: zip -qq -r javadoc.zip target/apidocs
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
