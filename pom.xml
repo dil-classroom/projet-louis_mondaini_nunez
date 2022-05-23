@@ -19,6 +19,11 @@
 
   <dependencies>
     <dependency>
+      <groupId>io.methvin</groupId>
+      <artifactId>directory-watcher</artifactId>
+      <version>0.15.1</version>
+    </dependency>
+    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.13.2</version>

@@ -64,7 +64,9 @@ public class PageParser {
 
         String[] split = content.split("---");
         Map<String, Object> metadata = yaml.load(split[0]);
-        metadata.replace("date", new SimpleDateFormat("yyyy-MM-dd").format(metadata.get("date")));
+        if (metadata.containsKey("date")) {
+            metadata.replace("date", new SimpleDateFormat("yyyy-MM-dd").format(metadata.get("date")));
+        }
 
         return new Page(metadata, split[1]);
     }
