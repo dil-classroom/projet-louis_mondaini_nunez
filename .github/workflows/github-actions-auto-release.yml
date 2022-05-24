@@ -15,11 +15,20 @@ jobs:
       - name: Read patch Note file
         id: getPatchNote
         run: |
-            export changelog=$(cat `pwd`/doc/changelog.md)
-            changelog="${changelog//'%'/'%25'}"
-            changelog="${changelog//$'\n'/'%0A'}"
-            changelog="${changelog//$'\r'/'%0D'}"
-            echo "::set-output name=changelog::$(echo "$changelog")"
+          export changelog=$(cat `pwd`/doc/changelog.md)
+          changelog="${changelog//'%'/'%25'}"
+          changelog="${changelog//$'\n'/'%0A'}"
+          changelog="${changelog//$'\r'/'%0D'}"
+          echo "::set-output name=changelog::$(echo "$changelog")"
+      - name: Generate javadoc
+        run: mvn javadoc:aggregate-jar
+      - name: Install zip
+        uses: montudor/action-zip@v1
+      - name: Zip Javadoc
+        run: | 
+          zip -qq -r target/javadoc.zip target/apidocs
+          ls -lisa
+          pwd
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -41,3 +50,13 @@ jobs:
             Merci à @damianomondaini @NunezTania @hadrylouis pour leurs contributions
           draft: false
           prerelease: false
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          asset_path: target/javadoc.zip
+          asset_name: javadoc.zip
+          asset_content_type: application/zip

@@ -1,14 +1,10 @@
 package ch.heig.statique.Commands;
 
-import ch.heig.statique.Parser.PageParser;
-import ch.heig.statique.Site.Page;
-import ch.heig.statique.Utils.Utils;
+import ch.heig.statique.Build.Builder;
+import ch.heig.statique.Utils.DirectoryWatchingUtility;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.concurrent.Callable;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 import picocli.CommandLine;
 
 /** Permet de compiler un projet en site statique Le site généré se trouve dans le dossier build/ */
@@ -19,46 +15,21 @@ import picocli.CommandLine;
         description = "Build a static site")
 public class Build implements Callable<Integer> {
     @CommandLine.Parameters(index = "0", description = "The directory containing the site")
-    private File file;
+    private File siteFolder;
+
+    @CommandLine.Option(
+            names = {"--watch"},
+            description = "Watch site directory for changes and hot rebuild")
+    private boolean watch = false;
 
     @Override
     public Integer call() throws IOException {
-        if (file.isAbsolute()) {
-            file = new File(file.toString() + Utils.SEPARATOR + "site");
-        } else {
-            throw new RuntimeException("Please use an absolute path");
-        }
+        File buildFolder = Builder.buildSite(siteFolder);
 
-        File config = new File(file + Utils.SEPARATOR + "config.yaml");
-        if (!FileUtils.directoryContains(file, config)) {
-            throw new RuntimeException("Could not find any config.yaml file");
-        }
-
-        File build = new File(file + Utils.SEPARATOR + "build");
-        FileUtils.deleteDirectory(build);
-
-        FileUtils.copyDirectory(
-                file,
-                build,
-                pathname -> {
-                    if (pathname.getName().equals("build") && pathname.isDirectory()
-                            || pathname.getName().equals("config.yaml")) {
-                        return false;
-                    }
-
-                    return true;
-                });
-
-        var it = FileUtils.iterateFiles(build, new String[] {"md"}, true);
-
-        while (it.hasNext()) {
-            File md = it.next();
-            Page page = PageParser.parseFromMarkdownFile(md);
-            FileUtils.writeStringToFile(md, page.getHtml(), StandardCharsets.UTF_8, false);
-            if (!md.renameTo(
-                    new File(FilenameUtils.removeExtension(md.getAbsolutePath()) + ".html"))) {
-                throw new RuntimeException("Cannot rename the md files to html files");
-            }
+        if (watch) {
+            DirectoryWatchingUtility directoryWatchingUtility =
+                    new DirectoryWatchingUtility(siteFolder, buildFolder);
+            directoryWatchingUtility.watch();
         }
 
         return 0;
