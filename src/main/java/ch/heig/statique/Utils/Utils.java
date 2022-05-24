@@ -28,7 +28,13 @@ public class Utils {
         return extension;
     }
 
-    /** https://www.baeldung.com/java-copy-directory */
+    /**
+     * https://www.baeldung.com/java-copy-directory
+     *
+     * @throws IOException if the copy fails
+     * @param sourceDirectoryLocation the source directory
+     * @param destinationDirectoryLocation the destination directory
+     */
     public static void copyDirectory(
             String sourceDirectoryLocation, String destinationDirectoryLocation)
             throws IOException {
