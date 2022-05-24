@@ -1,4 +1,8 @@
-Cette version intègre les commandes/fonctionnalités suivantes :
-- Commande `build` permettant de compiler un site statique
-- Commande `serve` permettant de démarrer un serveur web afin de consulter le site statique
-- Le début de l'intégration de la gestion de templates (fin prévue pour le prochain sprint)
+Cette version intègre les fonctionnalités suivantes :
+
+- Moteur de template
+- Générateur de site à la volée. 
+- Zip de la Javadoc à disposition dans la release
+
+Il est également déjà prévu que la prochaine release se concentre sur
+principalement sur du refactoring ainsi que l'amélioration du CI/CD 
