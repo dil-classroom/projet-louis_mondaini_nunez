@@ -1,10 +1,10 @@
 package ch.heig.statique.Commands;
 
-import ch.heig.statique.Commands.Clean;
-import ch.heig.statique.Utils.Utils;
-import org.junit.jupiter.api.*;
-import picocli.CommandLine;
+import static com.github.stefanbirkner.systemlambda.SystemLambda.tapSystemErrAndOut;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
+import ch.heig.statique.Utils.Utils;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.PrintStream;
@@ -12,10 +12,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
-
-import static com.github.stefanbirkner.systemlambda.SystemLambda.tapSystemErrAndOut;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import org.junit.jupiter.api.*;
+import picocli.CommandLine;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CleanCommandTest {
@@ -51,19 +49,36 @@ public class CleanCommandTest {
     @Test
     @Order(1)
     void testCleanCommandWithRelativePath() throws Exception {
-        String outText = tapSystemErrAndOut(() -> {
-            new CommandLine(new Clean()).execute("abc");
-        });
+        String outText =
+                tapSystemErrAndOut(
+                        () -> {
+                            new CommandLine(new Clean()).execute("abc");
+                        });
         assertEquals("Please use an absolute path", outText.trim());
     }
 
     @Test
     @Order(3)
     void testDeleteDirectory() throws Exception {
-        String outText = tapSystemErrAndOut(() -> {
-            new CommandLine(new Clean()).execute(System.getProperty("user.dir") + Utils.SEPARATOR + "abc");
-        });
-        assertEquals("File "+ System.getProperty("user.dir") + Utils.SEPARATOR + "abc" + Utils.SEPARATOR + "site" + Utils.SEPARATOR + "build does not exist", outText.trim());
+        String outText =
+                tapSystemErrAndOut(
+                        () -> {
+                            new CommandLine(new Clean())
+                                    .execute(
+                                            System.getProperty("user.dir")
+                                                    + Utils.SEPARATOR
+                                                    + "abc");
+                        });
+        assertEquals(
+                "File "
+                        + System.getProperty("user.dir")
+                        + Utils.SEPARATOR
+                        + "abc"
+                        + Utils.SEPARATOR
+                        + "site"
+                        + Utils.SEPARATOR
+                        + "build does not exist",
+                outText.trim());
     }
 
     /**

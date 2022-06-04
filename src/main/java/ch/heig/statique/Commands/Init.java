@@ -2,7 +2,6 @@ package ch.heig.statique.Commands;
 
 import ch.heig.statique.Utils.Utils;
 import java.io.File;
-import java.io.IOException;
 import java.util.concurrent.Callable;
 import org.apache.commons.io.FileUtils;
 import picocli.CommandLine;

@@ -1,19 +1,18 @@
 package ch.heig.statique;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import ch.heig.statique.Commands.Init;
 import ch.heig.statique.Utils.Utils;
-import org.junit.jupiter.api.*;
-import picocli.CommandLine;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.*;
+import picocli.CommandLine;
 
 public class UtilsTest {
 
@@ -29,10 +28,17 @@ public class UtilsTest {
         new CommandLine(new Init())
                 .execute(System.getProperty("user.dir") + Utils.SEPARATOR + "abc");
         File file = new File(System.getProperty("user.dir") + Utils.SEPARATOR + "abc2");
-        Utils.copyDirectory(System.getProperty("user.dir") + Utils.SEPARATOR + "abc",
-                file.toString());
+        Utils.copyDirectory(
+                System.getProperty("user.dir") + Utils.SEPARATOR + "abc", file.toString());
         assertTrue(Files.exists(file.toPath()));
-        String subfolder = file + Utils.SEPARATOR + "site" + Utils.SEPARATOR + "template" + Utils.SEPARATOR + "menu.html";
+        String subfolder =
+                file
+                        + Utils.SEPARATOR
+                        + "site"
+                        + Utils.SEPARATOR
+                        + "template"
+                        + Utils.SEPARATOR
+                        + "menu.html";
         assertTrue(Files.exists(new File(subfolder).toPath()));
     }
 

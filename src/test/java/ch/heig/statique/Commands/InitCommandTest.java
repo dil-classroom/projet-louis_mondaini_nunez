@@ -1,10 +1,9 @@
 package ch.heig.statique.Commands;
 
-import ch.heig.statique.Commands.Init;
-import ch.heig.statique.Utils.Utils;
-import org.junit.jupiter.api.*;
-import picocli.CommandLine;
+import static com.github.stefanbirkner.systemlambda.SystemLambda.*;
+import static org.junit.jupiter.api.Assertions.*;
 
+import ch.heig.statique.Utils.Utils;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.PrintStream;
@@ -12,9 +11,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
-
-import static com.github.stefanbirkner.systemlambda.SystemLambda.*;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.*;
+import picocli.CommandLine;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class InitCommandTest {
@@ -74,9 +72,11 @@ public class InitCommandTest {
     @Order(4)
     @Test
     void testInitCommandWithRelativePath() throws Exception {
-        String outText = tapSystemErrAndOut(() -> {
-            new CommandLine(new Init()).execute("abc");
-        });
+        String outText =
+                tapSystemErrAndOut(
+                        () -> {
+                            new CommandLine(new Init()).execute("abc");
+                        });
         assertEquals("Please use an absolute path", outText.trim());
     }
 
