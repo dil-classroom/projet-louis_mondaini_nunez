@@ -1,4 +1,4 @@
-package ch.heig.statique;
+package ch.heig.statique.Commands;
 
 import ch.heig.statique.Commands.Build;
 import ch.heig.statique.Commands.Init;
