@@ -69,7 +69,6 @@ class ServeCommandTest {
                                                 }
                                             });
                             thread.start();
-                            Thread.sleep(1000);
                             HttpRequest request =
                                     HttpRequest.newBuilder()
                                             .uri(URI.create("http://localhost:8085"))

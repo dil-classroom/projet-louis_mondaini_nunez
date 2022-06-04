@@ -31,6 +31,7 @@ public class Build implements Callable<Integer> {
             System.err.println(e.getMessage());
             return 1;
         }
+        System.out.println("Build sucessful");
 
         if (watch) {
             DirectoryWatchingUtility directoryWatchingUtility =

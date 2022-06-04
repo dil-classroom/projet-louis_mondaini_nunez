@@ -2,6 +2,7 @@ package ch.heig.statique.Commands;
 
 import static com.github.stefanbirkner.systemlambda.SystemLambda.tapSystemErrAndOut;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import ch.heig.statique.Utils.Utils;
 import java.io.File;
@@ -47,10 +48,27 @@ class BuildCommandTest {
 
     @Test
     void testBuildCommand() throws Exception {
-        new CommandLine(new Init())
-                .execute(System.getProperty("user.dir") + Utils.SEPARATOR + "abc");
-        new CommandLine(new Build())
-                .execute(System.getProperty("user.dir") + Utils.SEPARATOR + "abc");
+        String outText =
+                tapSystemErrAndOut(
+                        () -> {
+                            new CommandLine(new Init())
+                                    .execute(
+                                            System.getProperty("user.dir")
+                                                    + Utils.SEPARATOR
+                                                    + "abc");
+                        });
+        assertTrue(outText.trim().contains("Layout template file created"));
+
+        outText =
+                tapSystemErrAndOut(
+                        () -> {
+                            new CommandLine(new Build())
+                                    .execute(
+                                            System.getProperty("user.dir")
+                                                    + Utils.SEPARATOR
+                                                    + "abc");
+                        });
+        assertTrue(outText.contains("Build sucessful"));
     }
 
     /**
