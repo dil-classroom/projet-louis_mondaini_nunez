@@ -19,17 +19,7 @@ import picocli.CommandLine;
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CommandsTest {
 
-    /** Vérifie que la commande execute puisse être exécutée */
-    @Test
-    @Order(1)
-    void testInitCommand() throws Exception {
-        try (ByteArrayOutputStream output = new ByteArrayOutputStream()) {
-            System.setOut(new PrintStream(output));
-            new CommandLine(new Init())
-                    .execute(System.getProperty("user.dir") + Utils.SEPARATOR + "abc");
-            assertTrue((output.toString().contains("Config file created")));
-        }
-    }
+
 
     /** Vérifie que la commande execute crée la structure de dossiers de base */
     @Test

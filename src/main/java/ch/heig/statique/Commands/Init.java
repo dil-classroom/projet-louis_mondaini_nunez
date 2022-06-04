@@ -2,6 +2,7 @@ package ch.heig.statique.Commands;
 
 import ch.heig.statique.Utils.Utils;
 import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.Callable;
 import org.apache.commons.io.FileUtils;
 import picocli.CommandLine;
@@ -26,7 +27,7 @@ public class Init implements Callable<Integer> {
     private File file;
 
     @Override
-    public Integer call() throws Exception {
+    public Integer call() {
         try {
             if (file.isAbsolute()) {
                 file = new File(file.toString() + Utils.SEPARATOR + "site");
@@ -133,7 +134,6 @@ public class Init implements Callable<Integer> {
 
         } catch (Exception e) {
             System.err.println(e.getMessage());
-            throw e;
         }
         return 0;
     }
