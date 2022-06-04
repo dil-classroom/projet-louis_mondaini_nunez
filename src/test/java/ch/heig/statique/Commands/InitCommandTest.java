@@ -15,7 +15,7 @@ import org.junit.jupiter.api.*;
 import picocli.CommandLine;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class InitCommandTest {
+class InitCommandTest {
 
     /** Vérifie que la commande execute puisse être exécutée */
     @Test

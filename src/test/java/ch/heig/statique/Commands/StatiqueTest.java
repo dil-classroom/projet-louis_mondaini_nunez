@@ -8,9 +8,9 @@ import ch.heig.statique.Statique;
 import org.junit.jupiter.api.Test;
 import picocli.CommandLine;
 
-public class StatiqueTest {
+class StatiqueTest {
     @Test
-    public void testVersion() throws Exception {
+    void testVersion() throws Exception {
         String outText =
                 tapSystemErrAndOut(
                         () -> {
@@ -20,7 +20,7 @@ public class StatiqueTest {
     }
 
     @Test
-    public void testStatique() throws Exception {
+    void testStatique() throws Exception {
         String outText =
                 tapSystemErrAndOut(
                         () -> {

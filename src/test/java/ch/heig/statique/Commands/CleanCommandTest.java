@@ -16,7 +16,7 @@ import org.junit.jupiter.api.*;
 import picocli.CommandLine;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class CleanCommandTest {
+class CleanCommandTest {
 
     /** Vérifie que la commande clean efface le dossier build */
     @Test

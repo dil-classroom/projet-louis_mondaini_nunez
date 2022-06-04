@@ -12,10 +12,10 @@ import java.util.Comparator;
 import org.junit.jupiter.api.*;
 import picocli.CommandLine;
 
-public class BuildCommandTest {
+class BuildCommandTest {
 
     @Test
-    public void testBuildCommandWithMissingFolder() throws Exception {
+    void testBuildCommandWithMissingFolder() throws Exception {
         String outText =
                 tapSystemErrAndOut(
                         () -> {
@@ -36,7 +36,7 @@ public class BuildCommandTest {
     }
 
     @Test
-    public void testBuildCommandWithRelativePath() throws Exception {
+    void testBuildCommandWithRelativePath() throws Exception {
         String outText =
                 tapSystemErrAndOut(
                         () -> {
@@ -46,7 +46,7 @@ public class BuildCommandTest {
     }
 
     @Test
-    public void testBuildCommand() throws Exception {
+    void testBuildCommand() throws Exception {
         new CommandLine(new Init())
                 .execute(System.getProperty("user.dir") + Utils.SEPARATOR + "abc");
         new CommandLine(new Build())

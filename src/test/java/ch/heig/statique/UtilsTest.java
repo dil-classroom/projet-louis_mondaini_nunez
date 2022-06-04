@@ -14,17 +14,17 @@ import java.util.Comparator;
 import org.junit.jupiter.api.*;
 import picocli.CommandLine;
 
-public class UtilsTest {
+class UtilsTest {
 
     @Test
-    public void testGetExtensionFromString() {
+    void testGetExtensionFromString() {
         assertEquals("txt", Utils.getExtensionFromString("file.txt"));
         assertEquals("yaml", Utils.getExtensionFromString("/mon/chemin/file.yaml"));
         assertEquals("yaml", Utils.getExtensionFromString("C:\\file.yaml"));
     }
 
     @Test
-    public void testCopyDirectory() throws IOException {
+    void testCopyDirectory() throws IOException {
         new CommandLine(new Init())
                 .execute(System.getProperty("user.dir") + Utils.SEPARATOR + "abc");
         File file = new File(System.getProperty("user.dir") + Utils.SEPARATOR + "abc2");

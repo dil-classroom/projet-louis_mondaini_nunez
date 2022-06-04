@@ -7,9 +7,9 @@ import ch.heig.statique.Site.Page;
 import org.junit.jupiter.api.Test;
 
 /** Unit test for simple App. */
-public class ParserTest {
+class ParserTest {
     @Test
-    public void parseFromString() {
+    void parseFromString() {
         final String markdown =
                 "titre: Mon premier article\n"
                         + "auteur: Bertil Chapuis\n"

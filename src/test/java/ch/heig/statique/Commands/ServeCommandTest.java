@@ -18,11 +18,11 @@ import org.junit.jupiter.api.*;
 import picocli.CommandLine;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class ServeCommandTest {
+class ServeCommandTest {
 
     @Test
     @Order(1)
-    public void testServeWithoutBuildCommand() throws Exception {
+    void testServeWithoutBuildCommand() throws Exception {
         String outText =
                 tapSystemErrAndOut(
                         () -> {
@@ -37,7 +37,7 @@ public class ServeCommandTest {
 
     @Test
     @Order(2)
-    public void testServeWithRelativePath() throws Exception {
+    void testServeWithRelativePath() throws Exception {
         String outText =
                 tapSystemErrAndOut(
                         () -> {
@@ -48,7 +48,7 @@ public class ServeCommandTest {
 
     @Test
     @Order(3)
-    public void testServe() throws Exception {
+    void testServe() throws Exception {
         new CommandLine(new Init())
                 .execute(System.getProperty("user.dir") + Utils.SEPARATOR + "abc");
         new CommandLine(new Build())
