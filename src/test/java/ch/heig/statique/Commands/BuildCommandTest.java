@@ -23,7 +23,7 @@ public class BuildCommandTest {
             new CommandLine(new Build()).execute(System.getProperty("user.dir") + Utils.SEPARATOR + "abc");
         });
         assertEquals("File system element for parameter 'directory' does not exist: '"
-                + System.getProperty("user.dir") + Utils.SEPARATOR + "abc\\site'", outText.trim());
+                + System.getProperty("user.dir") + Utils.SEPARATOR + "abc" + Utils.SEPARATOR + "site'", outText.trim());
     }
 
     @Test

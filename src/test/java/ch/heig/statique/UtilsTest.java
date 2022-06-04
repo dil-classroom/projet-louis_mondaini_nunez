@@ -32,7 +32,7 @@ public class UtilsTest {
         Utils.copyDirectory(System.getProperty("user.dir") + Utils.SEPARATOR + "abc",
                 file.toString());
         assertTrue(Files.exists(file.toPath()));
-        String subfolder = file + "\\site\\template\\menu.html";
+        String subfolder = file + Utils.SEPARATOR + "site" + Utils.SEPARATOR + "template" + Utils.SEPARATOR + "menu.html";
         assertTrue(Files.exists(new File(subfolder).toPath()));
     }
 
