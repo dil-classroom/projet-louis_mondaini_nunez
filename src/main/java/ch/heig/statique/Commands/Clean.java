@@ -44,6 +44,7 @@ public class Clean implements Callable<Integer> {
             file = new File(file.toString() + Utils.SEPARATOR + "site" + Utils.SEPARATOR + "build");
         } else {
             System.err.println("Please use an absolute path");
+            return 1;
         }
         deleteDirectory(file);
         return 0;

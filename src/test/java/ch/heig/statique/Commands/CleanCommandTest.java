@@ -54,7 +54,7 @@ public class CleanCommandTest {
         String outText = tapSystemErrAndOut(() -> {
             new CommandLine(new Clean()).execute("abc");
         });
-        assertEquals("Please use an absolute path File " + System.getProperty("user.dir") + Utils.SEPARATOR + "abc does not exist", outText.trim().replace("\r\n", " "));
+        assertEquals("Please use an absolute path", outText.trim());
     }
 
     @Test
