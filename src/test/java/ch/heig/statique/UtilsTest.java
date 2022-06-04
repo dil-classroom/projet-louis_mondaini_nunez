@@ -1,9 +1,9 @@
 package ch.heig.statique;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 import ch.heig.statique.Commands.Init;
+import ch.heig.statique.Utils.DirectoryWatchingUtility;
 import ch.heig.statique.Utils.Utils;
 import java.io.File;
 import java.io.IOException;
@@ -40,6 +40,22 @@ class UtilsTest {
                         + Utils.SEPARATOR
                         + "menu.html";
         assertTrue(Files.exists(new File(subfolder).toPath()));
+    }
+
+    @Test
+    void testWatcher() throws IOException {
+        assertDoesNotThrow(
+                () ->
+                        new DirectoryWatchingUtility(
+                                new File(System.getProperty("user.dir") + Utils.SEPARATOR + "abc"),
+                                new File(
+                                        System.getProperty("user.dir")
+                                                + Utils.SEPARATOR
+                                                + "abc"
+                                                + Utils.SEPARATOR
+                                                + "site"
+                                                + Utils.SEPARATOR
+                                                + "build")));
     }
 
     /**
