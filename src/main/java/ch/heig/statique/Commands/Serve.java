@@ -47,11 +47,13 @@ public class Serve implements Callable<Integer> {
                                     + Utils.SEPARATOR
                                     + "build/");
         } else {
-            throw new RuntimeException("Please use an aboslute path");
+            System.err.println("Please use an absolute path");
+            return 1;
         }
 
         if (!buildFolder.exists() || !buildFolder.isDirectory()) {
-            throw new RuntimeException("No build folder found. Please compile before");
+            System.err.println("No build folder found. Please compile before");
+            return 1;
         }
 
         resource_handler.setResourceBase(buildFolder.toString());

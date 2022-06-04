@@ -1,10 +1,9 @@
-package ch.heig.statique;
+package ch.heig.statique.Commands;
 
+import static com.github.stefanbirkner.systemlambda.SystemLambda.tapSystemErrAndOut;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import ch.heig.statique.Commands.Clean;
-import ch.heig.statique.Commands.Init;
 import ch.heig.statique.Utils.Utils;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -17,53 +16,11 @@ import org.junit.jupiter.api.*;
 import picocli.CommandLine;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class CommandsTest {
-
-
-
-    /** Vérifie que la commande execute crée la structure de dossiers de base */
-    @Test
-    @Order(2)
-    void testInitFolderIsCreated() {
-        Path path =
-                Paths.get(
-                        System.getProperty("user.dir")
-                                + Utils.SEPARATOR
-                                + "abc"
-                                + Utils.SEPARATOR
-                                + "site");
-        assertTrue(Files.exists(path));
-    }
-
-    /** Vérifie que la commande execute crée les fichiers par défaut */
-    @Test
-    @Order(3)
-    void testInitFolderConfigFiles() {
-        Path path =
-                Paths.get(
-                        System.getProperty("user.dir")
-                                + Utils.SEPARATOR
-                                + "abc"
-                                + Utils.SEPARATOR
-                                + "site"
-                                + Utils.SEPARATOR
-                                + "config.yaml");
-        assertTrue(Files.exists(path));
-        path =
-                Paths.get(
-                        System.getProperty("user.dir")
-                                + Utils.SEPARATOR
-                                + "abc"
-                                + Utils.SEPARATOR
-                                + "site"
-                                + Utils.SEPARATOR
-                                + "index.md");
-        assertTrue(Files.exists(path));
-    }
+class CleanCommandTest {
 
     /** Vérifie que la commande clean efface le dossier build */
     @Test
-    @Order(4)
+    @Order(2)
     void testCleanCommand() throws Exception {
         // create build folder
         File file =
@@ -87,6 +44,41 @@ public class CommandsTest {
         // verify build folder doesn't exist
         Path path = Paths.get(file.toString());
         assertFalse(Files.exists(path));
+    }
+
+    @Test
+    @Order(1)
+    void testCleanCommandWithRelativePath() throws Exception {
+        String outText =
+                tapSystemErrAndOut(
+                        () -> {
+                            new CommandLine(new Clean()).execute("abc");
+                        });
+        assertEquals("Please use an absolute path", outText.trim());
+    }
+
+    @Test
+    @Order(3)
+    void testDeleteDirectory() throws Exception {
+        String outText =
+                tapSystemErrAndOut(
+                        () -> {
+                            new CommandLine(new Clean())
+                                    .execute(
+                                            System.getProperty("user.dir")
+                                                    + Utils.SEPARATOR
+                                                    + "abc");
+                        });
+        assertEquals(
+                "File "
+                        + System.getProperty("user.dir")
+                        + Utils.SEPARATOR
+                        + "abc"
+                        + Utils.SEPARATOR
+                        + "site"
+                        + Utils.SEPARATOR
+                        + "build does not exist",
+                outText.trim());
     }
 
     /**
