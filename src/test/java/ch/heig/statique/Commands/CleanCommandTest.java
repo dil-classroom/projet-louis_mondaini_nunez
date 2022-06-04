@@ -54,8 +54,7 @@ public class CleanCommandTest {
         String outText = tapSystemErrAndOut(() -> {
             new CommandLine(new Clean()).execute("abc");
         });
-        assertEquals("Please use an absolute path\r\n" +
-                "File " + System.getProperty("user.dir") + Utils.SEPARATOR + "abc does not exist", outText.trim());
+        assertEquals("Please use an absolute path File " + System.getProperty("user.dir") + Utils.SEPARATOR + "abc does not exist", outText.trim().replace("\r\n", " "));
     }
 
     @Test
@@ -64,7 +63,7 @@ public class CleanCommandTest {
         String outText = tapSystemErrAndOut(() -> {
             new CommandLine(new Clean()).execute(System.getProperty("user.dir") + Utils.SEPARATOR + "abc");
         });
-        assertEquals("File "+ System.getProperty("user.dir") + Utils.SEPARATOR + "abc\\site\\build does not exist", outText.trim());
+        assertEquals("File "+ System.getProperty("user.dir") + Utils.SEPARATOR + "abc" + Utils.SEPARATOR + "site" + Utils.SEPARATOR + "build does not exist", outText.trim());
     }
 
     /**
