@@ -32,7 +32,7 @@ public class Init implements Callable<Integer> {
             if (file.isAbsolute()) {
                 file = new File(file.toString() + Utils.SEPARATOR + "site");
             } else {
-                throw new RuntimeException("Please use an aboslute path");
+                throw new RuntimeException("Please use an absolute path");
             }
 
             if (!file.mkdirs()) {
@@ -99,7 +99,7 @@ public class Init implements Callable<Integer> {
                 String content = "<ul></ul>";
                 FileUtils.writeStringToFile(menuTemplate, content, "UTF-8");
             } else {
-                System.out.println("Menu template file could not be created");
+                System.err.println("Menu template file could not be created");
             }
 
             if (layoutTemplate.createNewFile()) {
@@ -129,7 +129,7 @@ public class Init implements Callable<Integer> {
                                 + CRLF;
                 FileUtils.writeStringToFile(layoutTemplate, content, "UTF-8");
             } else {
-                System.out.println("Layout template file could not be created");
+                System.err.println("Layout template file could not be created");
             }
 
         } catch (Exception e) {

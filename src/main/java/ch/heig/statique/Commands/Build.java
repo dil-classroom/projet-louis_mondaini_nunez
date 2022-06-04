@@ -24,7 +24,13 @@ public class Build implements Callable<Integer> {
 
     @Override
     public Integer call() throws IOException {
-        File buildFolder = Builder.buildSite(siteFolder);
+        File buildFolder;
+        try {
+            buildFolder = Builder.buildSite(siteFolder);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            return 1;
+        }
 
         if (watch) {
             DirectoryWatchingUtility directoryWatchingUtility =

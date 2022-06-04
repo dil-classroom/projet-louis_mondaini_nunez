@@ -2,9 +2,7 @@ package ch.heig.statique;
 
 import ch.heig.statique.Commands.Init;
 import ch.heig.statique.Utils.Utils;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import picocli.CommandLine;
 
 import java.io.ByteArrayOutputStream;
@@ -18,6 +16,7 @@ import java.util.Comparator;
 import static com.github.stefanbirkner.systemlambda.SystemLambda.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class InitCommandTest {
 
     /** Vérifie que la commande execute puisse être exécutée */
@@ -32,13 +31,53 @@ public class InitCommandTest {
         }
     }
 
+    /** Vérifie que la commande execute crée la structure de dossiers de base */
+    @Test
     @Order(2)
+    void testInitFolderIsCreated() {
+        Path path =
+                Paths.get(
+                        System.getProperty("user.dir")
+                                + Utils.SEPARATOR
+                                + "abc"
+                                + Utils.SEPARATOR
+                                + "site");
+        assertTrue(Files.exists(path));
+    }
+
+    /** Vérifie que la commande execute crée les fichiers par défaut */
+    @Test
+    @Order(3)
+    void testInitFolderConfigFiles() {
+        Path path =
+                Paths.get(
+                        System.getProperty("user.dir")
+                                + Utils.SEPARATOR
+                                + "abc"
+                                + Utils.SEPARATOR
+                                + "site"
+                                + Utils.SEPARATOR
+                                + "config.yaml");
+        assertTrue(Files.exists(path));
+        path =
+                Paths.get(
+                        System.getProperty("user.dir")
+                                + Utils.SEPARATOR
+                                + "abc"
+                                + Utils.SEPARATOR
+                                + "site"
+                                + Utils.SEPARATOR
+                                + "index.md");
+        assertTrue(Files.exists(path));
+    }
+
+    @Order(4)
     @Test
     void testInitCommandWithRelativePath() throws Exception {
         String outText = tapSystemErrAndOut(() -> {
             new CommandLine(new Init()).execute("abc");
         });
-        assertEquals("Please use an aboslute path", outText.trim());
+        assertEquals("Please use an absolute path", outText.trim());
     }
 
     /**
