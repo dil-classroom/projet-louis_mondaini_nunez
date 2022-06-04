@@ -1,5 +1,6 @@
 package ch.heig.statique.Commands;
 
+import ch.heig.statique.Utils.DirectoryWatchingUtility;
 import ch.heig.statique.Utils.Utils;
 import java.io.File;
 import java.util.Properties;
@@ -19,7 +20,12 @@ import picocli.CommandLine;
         description = "Serve a static site")
 public class Serve implements Callable<Integer> {
     @CommandLine.Parameters(index = "0", description = "The directory containing the site")
-    private File file;
+    private File siteFolder;
+
+    @CommandLine.Option(
+            names = {"--watch"},
+            description = "Watch site directory for changes and hot rebuild")
+    private boolean watch = false;
 
     @Override
     public Integer call() throws Exception {
@@ -27,13 +33,15 @@ public class Serve implements Callable<Integer> {
         properties.load(this.getClass().getClassLoader().getResourceAsStream("project.properties"));
         Server server = new Server(Integer.parseInt(properties.getProperty("serverport")));
 
+        File buildFolder;
+
         ResourceHandler resource_handler = new ResourceHandler();
         resource_handler.setDirectoriesListed(true);
 
-        if (file.isAbsolute()) {
-            file =
+        if (siteFolder.isAbsolute()) {
+            buildFolder =
                     new File(
-                            file.toString()
+                            siteFolder.toString()
                                     + Utils.SEPARATOR
                                     + "site"
                                     + Utils.SEPARATOR
@@ -42,16 +50,23 @@ public class Serve implements Callable<Integer> {
             throw new RuntimeException("Please use an aboslute path");
         }
 
-        if (!file.exists() || !file.isDirectory()) {
-            throw new RuntimeException("No site folder found. Please compile before");
+        if (!buildFolder.exists() || !buildFolder.isDirectory()) {
+            throw new RuntimeException("No build folder found. Please compile before");
         }
 
-        resource_handler.setResourceBase(file.toString());
+        resource_handler.setResourceBase(buildFolder.toString());
         HandlerList handlers = new HandlerList();
         handlers.setHandlers(new Handler[] {resource_handler, new DefaultHandler()});
         server.setHandler(handlers);
 
         server.start();
+
+        if (watch) {
+            DirectoryWatchingUtility directoryWatchingUtility =
+                    new DirectoryWatchingUtility(siteFolder, buildFolder);
+            directoryWatchingUtility.watch();
+        }
+
         server.join();
         return 0;
     }
