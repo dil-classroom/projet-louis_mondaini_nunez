@@ -33,9 +33,9 @@ public class Clean implements Callable<Integer> {
             }
         }
         if (!file.exists())
-            System.out.println("File " + file.getAbsolutePath() + " does not exist");
+            System.err.println("File " + file.getAbsolutePath() + " does not exist");
         else if (!file.delete())
-            System.out.println("File " + file.getAbsolutePath() + " could not be deleted");
+            System.err.println("File " + file.getAbsolutePath() + " could not be deleted");
     }
 
     @Override
@@ -43,7 +43,8 @@ public class Clean implements Callable<Integer> {
         if (file.isAbsolute()) {
             file = new File(file.toString() + Utils.SEPARATOR + "site" + Utils.SEPARATOR + "build");
         } else {
-            throw new RuntimeException("Please use an aboslute path");
+            System.err.println("Please use an absolute path");
+            return 1;
         }
         deleteDirectory(file);
         return 0;

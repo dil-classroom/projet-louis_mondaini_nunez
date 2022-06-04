@@ -7,7 +7,7 @@ import java.io.PrintStream;
 import org.junit.jupiter.api.Test;
 import picocli.CommandLine;
 
-public class StatiqueTest {
+class StatiqueTest {
 
     @Test
     void testExitCode() {
