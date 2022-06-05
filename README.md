@@ -7,8 +7,9 @@
 * [Description du projet](#description-du-projet)
   * [But](#but)
   * [Auteurs](#auteurs)
-  * [Licence](#licence)
-  * [Contributions](#contributions)
+* [Documentation](#documentation)
+* [Licence](#licence)
+* [Contributions](#contributions)
 
 
 ## Description du projet
@@ -23,7 +24,7 @@ Le but de ce projet est de créer un générateur de site statique en Java. Il e
 * Mondaini Damiano
 * Nunez Tania
 
-## Installation
+### Installation
 
 Pour pouvoir utiliser le programme `statique`, il suffit de lancer le build du 
 projet puis de unzip la source en exécutant les commandes suivantes
@@ -40,6 +41,138 @@ Linux :
 
 Windows : utiliser git bash
 
+## Documentation
+
+Le générateur de site statique propose les commandes suivantes :
+
+### ``init``
+
+La commande ``init`` permet de créer un projet statique et ainsi d'initialiser le projet dans un dossier de votre choix.
+Pour utiliser cette commande, il suffit de passer en paramètre le chemin absolu du dossier dans lequel vous 
+souhaitez créer le projet. A la suite de cette commande, le projet sera créé est une structure de dossiers / fichiers
+de base sera créé et pourra ainsi être complétée par l'utilisateur.
+
+Les dossiers / fichiers de base sont créés dans le sous-dossier ``site`` dans lequel vous trouverez 
+les fichiers de configuration du générateur de site statique. le fichier de configuration de base se nomme 
+``config.yaml``. Un autre fichier de démo ``index.md`` est créé dans le même dossier.
+
+La structure des fichiers créés est la suivante :
+
+```
+site/
+    template/
+    config.yaml
+    index.md
+```
+
+Exemple d'utilisation :
+
+```
+statique init /home/user/projet
+```
+
+### ``build``
+
+La commande ``build`` permet de générer le site statique et ainsi le compiler. Cette commande
+va avoir comme effet de compiler tous le fichiers du projet en ``html``. Le résultat de
+cette commande se trouve dans le sous-dossier ``build`` du projet. Pour lancer cette commande, 
+il suffit de passer en paramètre le chemin absolu du dossier dans lequel se trouve le projet.
+
+A la suite de cette commande, la structure du projet sera :
+
+```
+site/
+    build/
+      index.html
+    template/
+    config.yaml
+    index.md
+```
+
+Il est également possible de passer en paramètre de cette commande
+l'option ``--watch``. Cette option va avoir pour effet de compiler le projet à chaque modification
+de fichier dans le projet.
+
+Exemple d'utilisation :
+
+```
+statique build /home/user/projet [--watch]
+```
+
+### ``serve``
+
+La commande ``serve`` permet de lancer un serveur web sur le port ``8085`` et ainsi permettre de
+consulter le site statique. Pour lancer cette commande, il suffit de passer en paramètre le chemin
+absolu du dossier dans lequel se trouve le projet. 
+
+Il est également possible de passer en paramètre de cette commande
+l'option ``--watch``. Cette option va avoir pour effet de compiler le projet à chaque modification
+de fichier dans le projet. Le modification de cette recompilation sera instantanément
+visible sur le serveur web.
+
+Exemple d'utilisation :
+
+```
+statique serve /home/user/projet [--watch]
+```
+
+### ``clean``
+
+La commande ``clean`` permet de supprimer le dossier ``build`` du projet. Pour lancer cette commande,
+il suffit de passer en paramètre le chemin absolu du dossier dans lequel se trouve le projet.
+
+Exemple d'utilisation :
+
+```
+statique clean /home/user/projet
+```
+
+## Manuel d'utilisation
+
+Maintenant que les différentes commandes ont été décrites, voici un petit manuel d'utilisation.
+Cet exemple a pour objectif de montrer comment utiliser le générateur de site statique en partant
+d'un dossier vide.
+
+1. Créer un projet statique
+
+```
+statique init /home/user/projet
+```
+
+2. Modifier le fichier ``config.yaml`` contenant la configuration du générateur de site statique
+
+3. Modifier le fichier ``index.md`` contenant le contenu du site statique et y ajouter
+le contenu souhaité. Il est également possible de créer d'autres fichiers ou sous-dossier de le même
+répertoire. Tous les fichiers et sous-dossier seront automatiquement compiler lors de la commande ``build``.
+
+4. Ajouter un fichier de template dans le dossier ``template``. Les fichiers de templates sont des fichiers
+``.html``. Ces fichiers contiennent une structure ``html``. Dans ces 
+fichiers, il est possible d'utiliser des variables définies dans le fichier de configuration du générateur.
+De plus, il est possible d'inclure au moyen de ``{% include fichier.html }`` d'autres 
+fichiers de template.
+
+5. Compiler le projet (en utilisant ou non l'option ``--watch``)
+
+```
+statique build /home/user/projet
+```
+
+6. Lancer le serveur web (en utilisant ou non l'option ``--watch``)
+
+```
+statique serve /home/user/projet
+```
+
+Une fois le serveur web lancé, il est possible de naviguer sur le site statique en utilisant
+le navigateur web et en tapant l'adresse suivante : ``http://localhost:8085/``.
+
+7. Supprimer le dossier ``build`` du projet. Pour cela, il suffit de lancer la commande :
+
+```
+statique clean /home/user/projet
+```
+
+
 ## Licence
 
 Ce projet est sous licence **MIT**. Cela signifie que toute personne peut le reprendre, le modifier et le redistribuer.
@@ -47,3 +180,6 @@ Ce projet est sous licence **MIT**. Cela signifie que toute personne peut le rep
 ## Contributions
 
 Pour contribuer au projet, merci de consulter le code de [conduite du projet](code-of-conduct.md).
+
+
+
