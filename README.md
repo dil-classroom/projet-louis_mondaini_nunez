@@ -8,6 +8,7 @@
   * [But](#but)
   * [Auteurs](#auteurs)
 * [Documentation](#documentation)
+* [Manuel d'utilisation](#manuel-dutilisation)
 * [Licence](#licence)
 * [Contributions](#contributions)
 
