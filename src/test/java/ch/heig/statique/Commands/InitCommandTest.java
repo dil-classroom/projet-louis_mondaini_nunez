@@ -25,7 +25,7 @@ class InitCommandTest {
             System.setOut(new PrintStream(output));
             new CommandLine(new Init())
                     .execute(System.getProperty("user.dir") + Utils.SEPARATOR + "abc");
-            assertTrue((output.toString().contains("Config file created")));
+            assertTrue((output.toString().contains("Init successful")));
         }
     }
 

@@ -57,7 +57,7 @@ class BuildCommandTest {
                                                     + Utils.SEPARATOR
                                                     + "abc");
                         });
-        assertTrue(outText.trim().contains("Layout template file created"));
+        assertTrue(outText.trim().contains("Init successful"));
 
         outText =
                 tapSystemErrAndOut(
