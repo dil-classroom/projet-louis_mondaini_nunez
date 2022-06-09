@@ -5,14 +5,16 @@ import java.io.IOException;
 import java.nio.file.FileSystems;
 import org.apache.commons.io.FileUtils;
 
-/** A simple utility class to simplify redondant tasks */
+/**
+ * A simple utility class to do some repetitive tasks.
+ */
 public class Utils {
 
     public static String SEPARATOR = FileSystems.getDefault().getSeparator();
 
     /**
      * Get the extension from a file Source:
-     * https://mkyong.com/java/how-to-get-file-extension-in-java/
+     * <a href="https://mkyong.com/java/how-to-get-file-extension-in-java/">https://mkyong.com/java/how-to-get-file-extension-in-java/</a>
      *
      * @param fileName the given name of the file
      * @return The file extension
@@ -29,11 +31,12 @@ public class Utils {
     }
 
     /**
-     * https://www.baeldung.com/java-copy-directory
+     * Copy a directory recursively to another directory.
+     * <a href="https://www.baeldung.com/java-copy-directory">https://www.baeldung.com/java-copy-directory</a>
      *
-     * @throws IOException if the copy fails
      * @param sourceDirectoryLocation the source directory
      * @param destinationDirectoryLocation the destination directory
+     * @throws IOException if the copy fails
      */
     public static void copyDirectory(
             String sourceDirectoryLocation, String destinationDirectoryLocation)
