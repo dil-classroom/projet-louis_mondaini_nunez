@@ -28,7 +28,7 @@ public class Init implements Callable<Integer> {
     public Integer call() {
         try {
             if (!file.isAbsolute()) {
-                throw new RuntimeException("Please give an absolute path");
+                throw new RuntimeException("Please use an absolute path");
             } else {
                 file = new File(file + Utils.SEPARATOR + "site");
                 if (!file.mkdirs()) {
@@ -46,6 +46,7 @@ public class Init implements Callable<Integer> {
                                     + Utils.SEPARATOR
                                     + "site"),
                     file);
+            System.out.println("Init successful");
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
