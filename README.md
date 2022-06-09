@@ -27,6 +27,7 @@ Le but de ce projet est de créer un générateur de site statique en Java. Il e
 
 ### Installation
 
+Récupérer la dernière [release](https://github.com/dil-classroom/projet-louis_mondaini_nunez/releases) du projet (actuellement il s'agit de la version v0.0.3).
 Pour pouvoir utiliser le programme `statique`, il suffit de lancer le build du 
 projet puis de unzip la source en exécutant les commandes suivantes
 
@@ -34,13 +35,22 @@ projet puis de unzip la source en exécutant les commandes suivantes
 mvn clean install \
     && unzip -o target/statique.zip
 ```
+![mvn clean install result](/use-examples/mvn_clean_install_result.JPG)
+
+![files unzipped](/use-examples/unzip_result.JPG)
 
 Il est alors ensuite possible d'ajouter le projet dans son PATH
 
 Linux : 
 ```export PATH=$PATH:&#96;pwd&#96;/statique/bin```
 
-Windows : utiliser git bash
+![export path](/use-examples/export_path_result.JPG)
+
+Windows : utiliser git bash ou directement modifier la variable d'environnement *PATH*
+
+Une fois le projet installé et configuré, afin de tester son fonctionnement, il est possible d'exécuter la commande ``statique --version`` qui devrait présenter le comportement suivant si l'installation et la configuration ont été un succès:
+
+![statique version result](/use-examples/statique_version.JPG)
 
 ## Documentation
 
@@ -50,11 +60,11 @@ Le générateur de site statique propose les commandes suivantes :
 
 La commande ``init`` permet de créer un projet statique et ainsi d'initialiser le projet dans un dossier de votre choix.
 Pour utiliser cette commande, il suffit de passer en paramètre le chemin absolu du dossier dans lequel vous 
-souhaitez créer le projet. A la suite de cette commande, le projet sera créé est une structure de dossiers / fichiers
+souhaitez créer le projet. A la suite de cette commande, le projet sera créé et une structure de dossiers / fichiers
 de base sera créé et pourra ainsi être complétée par l'utilisateur.
 
 Les dossiers / fichiers de base sont créés dans le sous-dossier ``site`` dans lequel vous trouverez 
-les fichiers de configuration du générateur de site statique. le fichier de configuration de base se nomme 
+les fichiers de configuration du générateur de site statique. Le fichier de configuration de base se nomme 
 ``config.yaml``. Un autre fichier de démo ``index.md`` est créé dans le même dossier.
 
 La structure des fichiers créés est la suivante :
@@ -66,11 +76,15 @@ site/
     index.md
 ```
 
-Exemple d'utilisation :
+Exemple d'utilisation sous Linux :
 
 ```
 statique init /home/user/projet
 ```
+
+Exemple d'utilisation sous Windows :
+
+![statique init example](/use-examples/statique_init.JPG)
 
 ### ``build``
 
