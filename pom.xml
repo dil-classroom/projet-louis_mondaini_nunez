@@ -185,7 +185,7 @@
             <endWithNewline/>
             <importOrder/>
             <googleJavaFormat>
-              <version>1.8</version>
+              <version>1.13.0</version>
               <style>AOSP</style>
               <reflowLongStrings>true</reflowLongStrings>
             </googleJavaFormat>
