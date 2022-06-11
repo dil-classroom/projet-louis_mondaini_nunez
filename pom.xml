@@ -222,6 +222,9 @@
               <goal>check</goal>
             </goals>
             <configuration>
+              <excludes>
+                <exclude>ch/heig/statique/Utils/DirectoryWatchingUtility.class</exclude>
+              </excludes>
               <rules>
                 <rule>
                   <element>PACKAGE</element>
