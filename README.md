@@ -108,11 +108,16 @@ Il est également possible de passer en paramètre de cette commande
 l'option ``--watch``. Cette option va avoir pour effet de compiler le projet à chaque modification
 de fichier dans le projet.
 
-Exemple d'utilisation :
+Exemples d'utilisation :
 
 ```
 statique build /home/user/projet [--watch]
 ```
+![statique build example](/use-examples/statique_build.JPG)
+
+![statique build watch example](/use-examples/statique_build_watch.JPG)
+
+![statique build watch modified example](/use-examples/statique_build_watch_modif.JPG)
 
 ### ``serve``
 
@@ -131,6 +136,8 @@ Exemple d'utilisation :
 statique serve /home/user/projet [--watch]
 ```
 
+![statique serve example](/use-examples/statique_serve.JPG)
+
 ### ``clean``
 
 La commande ``clean`` permet de supprimer le dossier ``build`` du projet. Pour lancer cette commande,
@@ -141,6 +148,10 @@ Exemple d'utilisation :
 ```
 statique clean /home/user/projet
 ```
+
+![statique clean example before](/use-examples/statique_clean_before.JPG)
+
+![statique clean after](/use-examples/statique_clean_after.JPG)
 
 ## Manuel d'utilisation
 
