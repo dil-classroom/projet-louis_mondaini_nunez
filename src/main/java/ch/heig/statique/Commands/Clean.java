@@ -5,7 +5,7 @@ import java.io.File;
 import java.util.concurrent.Callable;
 import picocli.CommandLine;
 
-/** Permet d'effacer le dossier build/ d'un site statique */
+/** Command to erase an existing site. */
 @CommandLine.Command(
         name = "clean",
         mixinStandardHelpOptions = true,
@@ -38,6 +38,11 @@ public class Clean implements Callable<Integer> {
             System.err.println("File " + file.getAbsolutePath() + " could not be deleted");
     }
 
+    /**
+     * Callable method to clean the site.
+     *
+     * @return 0 if the clean was successful, 1 otherwise
+     */
     @Override
     public Integer call() {
         if (file.isAbsolute()) {

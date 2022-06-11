@@ -7,10 +7,7 @@ import java.util.concurrent.Callable;
 import org.apache.commons.io.FileUtils;
 import picocli.CommandLine;
 
-/**
- * Permet d'initialiser un site statique Génère un fichier config.yaml contenant les configs du site
- * Génère un fichier index.md page racine du projet
- */
+/** Command to initialize a new site in the given directory. */
 @CommandLine.Command(
         name = "init",
         mixinStandardHelpOptions = true,
@@ -24,6 +21,11 @@ public class Init implements Callable<Integer> {
                     "The absolute path where the " + "root directory of the site will be initiated")
     private File file;
 
+    /**
+     * Callable method to initialize the site.
+     *
+     * @return 0 if the initialization was successful, 1 otherwise
+     */
     @Override
     public Integer call() {
         try {

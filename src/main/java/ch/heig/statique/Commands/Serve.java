@@ -12,7 +12,7 @@ import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 import picocli.CommandLine;
 
-/** Démarre un serveur web afin de pouvoir accéder aux site statique. */
+/** Command to serve the site on a local web server. */
 @CommandLine.Command(
         name = "serve",
         mixinStandardHelpOptions = true,
@@ -27,6 +27,12 @@ public class Serve implements Callable<Integer> {
             description = "Watch site directory for changes and hot rebuild")
     private boolean watch = false;
 
+    /**
+     * Callable method to serve the site.
+     *
+     * @return 0 if the serve was successful, 1 otherwise
+     * @throws Exception if an error occurs while reading or writing files or while serving the site
+     */
     @Override
     public Integer call() throws Exception {
         final Properties properties = new Properties();
