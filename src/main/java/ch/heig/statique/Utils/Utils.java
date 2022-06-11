@@ -6,5 +6,4 @@ import java.nio.file.FileSystems;
 public class Utils {
 
     public static String SEPARATOR = FileSystems.getDefault().getSeparator();
-
 }
