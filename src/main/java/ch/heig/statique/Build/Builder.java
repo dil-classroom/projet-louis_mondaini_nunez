@@ -19,17 +19,17 @@ import org.apache.commons.io.FilenameUtils;
 import org.yaml.snakeyaml.Yaml;
 
 /**
- * Builder class allowing to generate a website from a given directory
- * containing the sources and pages as markdown files and a configuration file.
- * It uses the Handlebars library to generate the HTML files.
+ * Builder class allowing to generate a website from a given directory containing the sources and
+ * pages as markdown files and a configuration file. It uses the Handlebars library to generate the
+ * HTML files.
  */
 public class Builder {
 
     /**
-     * Builds the website from the given directory. The directory must contain
-     * the website sources and the configuration file. The method iterates over
-     * the files in the directory and generates the corresponding HTML files and
-     * copy the other files in a new directory called "build".
+     * Builds the website from the given directory. The directory must contain the website sources
+     * and the configuration file. The method iterates over the files in the directory and generates
+     * the corresponding HTML files and copy the other files in a new directory called "build".
+     *
      * @param siteFolder the directory containing the website sources
      * @return the File to the build directory
      * @throws IOException if an error occurs while reading or writing files

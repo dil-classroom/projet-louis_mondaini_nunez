@@ -7,9 +7,7 @@ import java.util.concurrent.Callable;
 import org.apache.commons.io.FileUtils;
 import picocli.CommandLine;
 
-/**
- * Command to initialize a new site in the given directory.
- */
+/** Command to initialize a new site in the given directory. */
 @CommandLine.Command(
         name = "init",
         mixinStandardHelpOptions = true,
@@ -25,6 +23,7 @@ public class Init implements Callable<Integer> {
 
     /**
      * Callable method to initialize the site.
+     *
      * @return 0 if the initialization was successful, 1 otherwise
      */
     @Override

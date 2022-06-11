@@ -7,9 +7,7 @@ import java.io.IOException;
 import java.util.concurrent.Callable;
 import picocli.CommandLine;
 
-/**
- * Command to build the site from existing source files.
- */
+/** Command to build the site from existing source files. */
 @CommandLine.Command(
         name = "build",
         mixinStandardHelpOptions = true,
@@ -26,6 +24,7 @@ public class Build implements Callable<Integer> {
 
     /**
      * Callable method to build the site.
+     *
      * @return 0 if the build was successful, 1 otherwise
      * @throws IOException if an error occurs while reading or writing files
      */

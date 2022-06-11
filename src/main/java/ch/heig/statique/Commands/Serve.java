@@ -12,9 +12,7 @@ import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 import picocli.CommandLine;
 
-/**
- * Command to serve the site on a local web server.
- */
+/** Command to serve the site on a local web server. */
 @CommandLine.Command(
         name = "serve",
         mixinStandardHelpOptions = true,
@@ -31,6 +29,7 @@ public class Serve implements Callable<Integer> {
 
     /**
      * Callable method to serve the site.
+     *
      * @return 0 if the serve was successful, 1 otherwise
      * @throws Exception if an error occurs while reading or writing files or while serving the site
      */

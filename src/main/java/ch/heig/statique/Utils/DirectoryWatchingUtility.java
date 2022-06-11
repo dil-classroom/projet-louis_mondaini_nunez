@@ -7,16 +7,15 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 
-/**
- * Utility class to watch a directory for changes and hot-rebuild the site.
- */
+/** Utility class to watch a directory for changes and hot-rebuild the site. */
 public class DirectoryWatchingUtility {
 
     private final DirectoryWatcher watcher;
 
     /**
-     * Constructor of a DirectoryWatchingUtility object from a site directory
-     * and a folder to exclude (usually the build folder).
+     * Constructor of a DirectoryWatchingUtility object from a site directory and a folder to
+     * exclude (usually the build folder).
+     *
      * @param siteFolder the site directory
      * @param folderToExclude the folder to exclude
      * @throws IOException if an error occurs while creating the watcher
@@ -46,15 +45,14 @@ public class DirectoryWatchingUtility {
 
     /**
      * Stop watching the site directory.
+     *
      * @throws IOException if an error occurs while stopping the watcher
      */
     public void stopWatching() throws IOException {
         watcher.close();
     }
 
-    /**
-     * Start watching the site directory.
-     */
+    /** Start watching the site directory. */
     public void watch() {
         watcher.watch();
     }

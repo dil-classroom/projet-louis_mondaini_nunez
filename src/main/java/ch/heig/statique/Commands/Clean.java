@@ -5,9 +5,7 @@ import java.io.File;
 import java.util.concurrent.Callable;
 import picocli.CommandLine;
 
-/**
- * Command to erase an existing site.
- */
+/** Command to erase an existing site. */
 @CommandLine.Command(
         name = "clean",
         mixinStandardHelpOptions = true,
@@ -42,6 +40,7 @@ public class Clean implements Callable<Integer> {
 
     /**
      * Callable method to clean the site.
+     *
      * @return 0 if the clean was successful, 1 otherwise
      */
     @Override

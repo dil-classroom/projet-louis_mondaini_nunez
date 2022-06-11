@@ -10,21 +10,18 @@ import org.apache.commons.io.FileUtils;
 import org.commonmark.node.Link;
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
-import org.commonmark.renderer.html.AttributeProvider;
-import org.commonmark.renderer.html.AttributeProviderContext;
-import org.commonmark.renderer.html.AttributeProviderFactory;
 import org.commonmark.renderer.html.HtmlRenderer;
 import org.yaml.snakeyaml.Yaml;
 
 /**
- * Parser class allowing to parse a file from a file or string its representation
- * as a Page object.
+ * Parser class allowing to parse a file from a file or string its representation as a Page object.
  */
 public class PageParser {
 
     /**
-     * Convert the markdown string to HTML. The method also converts links
-     * to .md files to links to .html files.
+     * Convert the markdown string to HTML. The method also converts links to .md files to links to
+     * .html files.
+     *
      * @param content the markdown string
      * @return the HTML string
      */
@@ -35,16 +32,16 @@ public class PageParser {
         HtmlRenderer renderer =
                 HtmlRenderer.builder()
                         .attributeProviderFactory(
-                                context -> (node, tagName, attributes) -> {
-                                    if (node instanceof Link) {
-                                        String file = attributes.get("href");
-                                        if (file.endsWith(".md")) {
-                                            attributes.replace(
-                                                    "href",
-                                                    file.replace(".md", ".html"));
-                                        }
-                                    }
-                                })
+                                context ->
+                                        (node, tagName, attributes) -> {
+                                            if (node instanceof Link) {
+                                                String file = attributes.get("href");
+                                                if (file.endsWith(".md")) {
+                                                    attributes.replace(
+                                                            "href", file.replace(".md", ".html"));
+                                                }
+                                            }
+                                        })
                         .build();
 
         return renderer.render(document);
@@ -52,6 +49,7 @@ public class PageParser {
 
     /**
      * Parse the given file and return its representation as a Page object.
+     *
      * @param file the file to parse
      * @return the Page object
      * @throws IOException if an error occurs while reading the file
@@ -64,6 +62,7 @@ public class PageParser {
 
     /**
      * Parse the given string and return its representation as a Page object.
+     *
      * @param content the string to parse
      * @return the Page object
      */

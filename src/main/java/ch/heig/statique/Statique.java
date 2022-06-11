@@ -6,9 +6,7 @@ import java.util.Properties;
 import java.util.concurrent.Callable;
 import picocli.CommandLine;
 
-/**
- * Main class of the site. Entry point of the different commands.
- */
+/** Main class of the site. Entry point of the different commands. */
 @CommandLine.Command(
         name = "statique",
         description = "A static site generator",
@@ -42,8 +40,7 @@ public class Statique implements Callable<Integer> {
 }
 
 /**
- * Command to get the version of the project. It returns the version of the
- * project in the pom.xml
+ * Command to get the version of the project. It returns the version of the project in the pom.xml
  */
 class VersionProvider implements CommandLine.IVersionProvider {
     public String[] getVersion() throws IOException {
