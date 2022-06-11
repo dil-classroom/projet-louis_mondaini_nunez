@@ -59,6 +59,30 @@
       <artifactId>commonmark-ext-yaml-front-matter</artifactId>
       <version>0.18.2</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/org.eclipse.jgit/org.eclipse.jgit -->
+    <dependency>
+      <groupId>org.eclipse.jgit</groupId>
+      <artifactId>org.eclipse.jgit</artifactId>
+      <version>5.7.0.202003110725-r</version>
+    </dependency>
+    <dependency>
+      <groupId> org.apache.cassandra</groupId>
+      <artifactId>cassandra-all</artifactId>
+      <version>3.11.13</version>
+
+      <exclusions>
+        <exclusion>
+          <groupId>org.slf4j</groupId>
+          <artifactId>slf4j-log4j12</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>log4j</groupId>
+          <artifactId>log4j</artifactId>
+        </exclusion>
+      </exclusions>
+
+    </dependency>
+
   </dependencies>
 
   <build>

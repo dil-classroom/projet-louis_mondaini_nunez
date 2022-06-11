@@ -15,6 +15,7 @@ import picocli.CommandLine;
             Clean.class,
             Build.class,
             Serve.class,
+            Publish.class,
         },
         versionProvider = VersionProvider.class)
 public class Statique implements Callable<Integer> {
