@@ -34,6 +34,13 @@ public class Publish implements Callable<Integer> {
     @CommandLine.Parameters(index = "3", description = "The password for the GitHub repository")
     private String password;
 
+    @CommandLine.Option(
+            names = {"-s", "--ssh"},
+            paramLabel = "SSH_KEY_PATH",
+            description = "Use ssh session for git")
+    private boolean sshSession;
+    private String path = ".";
+
     @Override
     public Integer call() throws IOException, GitAPIException {
         try {
@@ -52,58 +59,40 @@ public class Publish implements Callable<Integer> {
 
             // Adding files to remote
             git.remoteAdd().setName("main").setUri(new URIish(repository)).call();
-
+            PushCommand pushCommand;
             // Pushing files to remote repository
-            PushCommand pushCommand =
-                    git.push()
-                            .setCredentialsProvider(
-                                    new UsernamePasswordCredentialsProvider(username, password));
-            SshSessionFactory sshSessionFactory =
-                    new JschConfigSessionFactory() {
-                        @Override
-                        protected void configure(OpenSshConfig.Host host, Session session) {
-                            // do nothing
-                        }
+            if (sshSession) {
+                pushCommand =
+                        git.push()
+                                .setCredentialsProvider(
+                                        new UsernamePasswordCredentialsProvider(username, password));
+                SshSessionFactory sshSessionFactory =
+                        new JschConfigSessionFactory() {
+                            @Override
+                            protected void configure(OpenSshConfig.Host host, Session session) {
+                                // do nothing
+                            }
 
-                        @Override
-                        protected JSch createDefaultJSch(FS fs) throws JSchException {
-                            JSch defaultJSch = super.createDefaultJSch(fs);
-                            defaultJSch.addIdentity(
-                                    "C:"
-                                            + Utils.SEPARATOR
-                                            + "Users"
-                                            + Utils.SEPARATOR
-                                            + "FNGUSER004"
-                                            + Utils.SEPARATOR
-                                            + ".ssh"
-                                            + Utils.SEPARATOR
-                                            + "id_ed25519");
+                            @Override
+                            protected JSch createDefaultJSch(FS fs) throws JSchException {
+                                JSch defaultJSch = super.createDefaultJSch(fs);
+                                // if key is protected with passphrase
+                                defaultJSch.addIdentity(path);
 
-                            // if key is protected with passphrase
-                            defaultJSch.addIdentity(
-                                    "C:"
-                                            + Utils.SEPARATOR
-                                            + "Users"
-                                            + Utils.SEPARATOR
-                                            + "FNGUSER004"
-                                            + Utils.SEPARATOR
-                                            + ".ssh"
-                                            + Utils.SEPARATOR
-                                            + "id_ed25519",
-                                    password);
-
-                            return defaultJSch;
-                        }
-                    };
-            pushCommand.setTransportConfigCallback(
-                    transport -> {
-                        SshTransport sshTransport = (SshTransport) transport;
-                        sshTransport.setSshSessionFactory(sshSessionFactory);
-                    });
+                                return defaultJSch;
+                            }
+                        };
+                pushCommand.setTransportConfigCallback(
+                        transport -> {
+                            SshTransport sshTransport = (SshTransport) transport;
+                            sshTransport.setSshSessionFactory(sshSessionFactory);
+                        });
+            } else {
+                pushCommand =git.push().setCredentialsProvider(new UsernamePasswordCredentialsProvider(username, password));
+            }
             pushCommand.add("master");
             pushCommand.setRemote("main");
             pushCommand.call();
-
         } catch (Exception e) {
             System.err.println(e.getMessage());
             return 1;
