@@ -6,7 +6,7 @@ import ch.heig.statique.Utils.Utils;
 import java.nio.file.FileSystems;
 import org.junit.jupiter.api.Test;
 
-public class UtilsTest {
+class UtilsTest {
 
     @Test
     void testSeparator() {
