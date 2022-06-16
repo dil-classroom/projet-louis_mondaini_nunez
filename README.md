@@ -1,6 +1,7 @@
 # Générateur de site statique en Java
 
 ![example workflow](https://github.com/dil-classroom/projet-louis_mondaini_nunez/actions/workflows/github-actions-maven.yml/badge.svg)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dil-classroom_projet-louis_mondaini_nunez&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=dil-classroom_projet-louis_mondaini_nunez)
 
 ## Table des matières
 
@@ -152,6 +153,21 @@ statique clean /home/user/projet
 ![statique clean example before](/use-examples/statique_clean_before.JPG)
 
 ![statique clean after](/use-examples/statique_clean_after.JPG)
+
+## Templating
+
+Dans le contenu des divers fichiers de template présents dans le dossier `template/` du projet, il est possible d'utiliser 
+le language de templating `handlebars`. Le fichier `layout.html` est le template principal du site. 
+Toutes les pages du site seront générées en utilisant ce template.
+
+Si vous souhaitez changer ce template et en ajouter d'autres, voici les principales commandes `handlebars`
+
+- `{{ site.var }}` - Permet d'insérer une variable de site dans le template. Les 
+variables de site sont définies dans le fichier `config.yaml` du projet.
+- `{{ page.title }}` - Permet d'insérer le titre de la page dans le template.
+Les variables de page sont définies dans chaque fichier de page mardown
+- `{{ > fichier }}` - Permet d'insérer le fichier fichier.html dans le template.
+
 
 ## Manuel d'utilisation
 
