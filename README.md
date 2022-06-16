@@ -116,9 +116,9 @@ statique build /home/user/projet [--watch]
 ```
 ![statique build example](/use-examples/statique_build.JPG)
 
-![statique build watch example](/use-examples/statique_build_watch.JPG)
+![statique build watch example](/use-examples/statique_build_watchV2.JPG)
 
-![statique build watch modified example](/use-examples/statique_build_watch_modif.JPG)
+![statique build watch modified example](/use-examples/statique_build_watch_modifV2.JPG)
 
 ### ``serve``
 
