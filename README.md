@@ -1,8 +1,6 @@
 # Générateur de site statique en Java
 
 ![example workflow](https://github.com/dil-classroom/projet-louis_mondaini_nunez/actions/workflows/github-actions-maven.yml/badge.svg)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dil-classroom_projet-louis_mondaini_nunez&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=dil-classroom_projet-louis_mondaini_nunez)
-
 ## Table des matières
 
 * [Description du projet](#description-du-projet)
@@ -43,7 +41,7 @@ mvn clean install \
 Il est alors ensuite possible d'ajouter le projet dans son PATH
 
 Linux : 
-```export PATH=$PATH:&#96;pwd&#96;/statique/bin```
+```export PATH=$PATH:`pwd`/statique/bin```
 
 ![export path](/use-examples/export_path_result.JPG)
 
