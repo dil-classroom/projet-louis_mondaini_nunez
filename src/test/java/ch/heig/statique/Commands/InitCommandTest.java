@@ -1,10 +1,8 @@
-package ch.heig.statique;
+package ch.heig.statique.Commands;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static com.github.stefanbirkner.systemlambda.SystemLambda.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import ch.heig.statique.Commands.Clean;
-import ch.heig.statique.Commands.Init;
 import ch.heig.statique.Utils.Utils;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -17,7 +15,7 @@ import org.junit.jupiter.api.*;
 import picocli.CommandLine;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class CommandsTest {
+class InitCommandTest {
 
     /** Vérifie que la commande execute puisse être exécutée */
     @Test
@@ -27,7 +25,7 @@ public class CommandsTest {
             System.setOut(new PrintStream(output));
             new CommandLine(new Init())
                     .execute(System.getProperty("user.dir") + Utils.SEPARATOR + "abc");
-            assertTrue((output.toString().contains("Config file created")));
+            assertTrue((output.toString().contains("Init successful")));
         }
     }
 
@@ -71,32 +69,15 @@ public class CommandsTest {
         assertTrue(Files.exists(path));
     }
 
-    /** Vérifie que la commande clean efface le dossier build */
-    @Test
     @Order(4)
-    void testCleanCommand() throws Exception {
-        // create build folder
-        File file =
-                new File(
-                        System.getProperty("user.dir")
-                                + Utils.SEPARATOR
-                                + "abc"
-                                + Utils.SEPARATOR
-                                + "site"
-                                + Utils.SEPARATOR
-                                + "build");
-        file.mkdirs();
-
-        // execute clean command
-        File file2 = new File(System.getProperty("user.dir") + Utils.SEPARATOR + "abc");
-        try (ByteArrayOutputStream output = new ByteArrayOutputStream()) {
-            System.setOut(new PrintStream(output));
-            new CommandLine(new Clean()).execute(file2.toString());
-        }
-
-        // verify build folder doesn't exist
-        Path path = Paths.get(file.toString());
-        assertFalse(Files.exists(path));
+    @Test
+    void testInitCommandWithRelativePath() throws Exception {
+        String outText =
+                tapSystemErrAndOut(
+                        () -> {
+                            new CommandLine(new Init()).execute("abc");
+                        });
+        assertEquals("Please use an absolute path", outText.trim());
     }
 
     /**

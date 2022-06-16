@@ -1,5 +1,6 @@
 package ch.heig.statique.Commands;
 
+import ch.heig.statique.Utils.DirectoryWatchingUtility;
 import ch.heig.statique.Utils.Utils;
 import java.io.File;
 import java.util.Properties;
@@ -11,7 +12,7 @@ import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.server.handler.ResourceHandler;
 import picocli.CommandLine;
 
-/** Démarre un serveur web afin de pouvoir accéder aux site statique. */
+/** Command to serve the site on a local web server. */
 @CommandLine.Command(
         name = "serve",
         mixinStandardHelpOptions = true,
@@ -19,39 +20,61 @@ import picocli.CommandLine;
         description = "Serve a static site")
 public class Serve implements Callable<Integer> {
     @CommandLine.Parameters(index = "0", description = "The directory containing the site")
-    private File file;
+    private File siteFolder;
 
+    @CommandLine.Option(
+            names = {"--watch"},
+            description = "Watch site directory for changes and hot rebuild")
+    private boolean watch = false;
+
+    /**
+     * Callable method to serve the site.
+     *
+     * @return 0 if the serve was successful, 1 otherwise
+     * @throws Exception if an error occurs while reading or writing files or while serving the site
+     */
     @Override
     public Integer call() throws Exception {
         final Properties properties = new Properties();
         properties.load(this.getClass().getClassLoader().getResourceAsStream("project.properties"));
         Server server = new Server(Integer.parseInt(properties.getProperty("serverport")));
 
+        File buildFolder;
+
         ResourceHandler resource_handler = new ResourceHandler();
         resource_handler.setDirectoriesListed(true);
 
-        if (file.isAbsolute()) {
-            file =
+        if (siteFolder.isAbsolute()) {
+            buildFolder =
                     new File(
-                            file.toString()
+                            siteFolder.toString()
                                     + Utils.SEPARATOR
                                     + "site"
                                     + Utils.SEPARATOR
                                     + "build/");
         } else {
-            throw new RuntimeException("Please use an aboslute path");
+            System.err.println("Please use an absolute path");
+            return 1;
         }
 
-        if (!file.exists() || !file.isDirectory()) {
-            throw new RuntimeException("No site folder found. Please compile before");
+        if (!buildFolder.exists() || !buildFolder.isDirectory()) {
+            System.err.println("No build folder found. Please compile before");
+            return 1;
         }
 
-        resource_handler.setResourceBase(file.toString());
+        resource_handler.setResourceBase(buildFolder.toString());
         HandlerList handlers = new HandlerList();
         handlers.setHandlers(new Handler[] {resource_handler, new DefaultHandler()});
         server.setHandler(handlers);
 
         server.start();
+
+        if (watch) {
+            DirectoryWatchingUtility directoryWatchingUtility =
+                    new DirectoryWatchingUtility(siteFolder, buildFolder);
+            directoryWatchingUtility.watch();
+        }
+
         server.join();
         return 0;
     }

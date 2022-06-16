@@ -16,7 +16,7 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - name: Build with Maven
-        run: mvn --batch-mode --update-snapshots verify -Djacoco.skip=true
+        run: mvn --batch-mode --update-snapshots verify
 
   build-windows:
     runs-on: windows-latest
@@ -28,7 +28,7 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - name: Build with Maven
-        run: mvn --batch-mode --update-snapshots verify '-Djacoco.skip=true'
+        run: mvn --batch-mode --update-snapshots verify
 
   build-macos:
     runs-on: macos-latest
@@ -40,4 +40,4 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
       - name: Build with Maven
-        run: mvn --batch-mode --update-snapshots verify -Djacoco.skip=true
+        run: mvn --batch-mode --update-snapshots verify
