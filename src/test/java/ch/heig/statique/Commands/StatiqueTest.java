@@ -16,7 +16,7 @@ class StatiqueTest {
                         () -> {
                             new CommandLine(new Statique()).execute("--version");
                         });
-        assertEquals("Statique v0.1", outText.trim());
+        assertEquals("Statique v0.0.4", outText.trim());
     }
 
     @Test
