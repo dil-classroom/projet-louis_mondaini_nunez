@@ -1,5 +1,0 @@
-#!/bin/sh
-
-cd "$(dirname "$0")"
-cd ..
-java -cp "lib/*" ch.heig.statique.Statique "$@"
