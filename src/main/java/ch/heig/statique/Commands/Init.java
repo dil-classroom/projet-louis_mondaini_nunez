@@ -2,7 +2,6 @@ package ch.heig.statique.Commands;
 
 import ch.heig.statique.Utils.Utils;
 import java.io.File;
-import java.nio.file.Path;
 import java.util.concurrent.Callable;
 import org.apache.commons.io.FileUtils;
 import picocli.CommandLine;
@@ -39,14 +38,7 @@ public class Init implements Callable<Integer> {
             }
 
             FileUtils.copyDirectory(
-                    new File(
-                            Path.of("").toAbsolutePath()
-                                    + Utils.SEPARATOR
-                                    + "src"
-                                    + Utils.SEPARATOR
-                                    + "archtemplate"
-                                    + Utils.SEPARATOR
-                                    + "site"),
+                    new File(getClass().getClassLoader().getResource("archtemplate").getFile()),
                     file);
             System.out.println("Init successful");
         } catch (Exception e) {
